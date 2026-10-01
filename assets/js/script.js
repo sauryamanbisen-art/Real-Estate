@@ -868,3 +868,65 @@ function toggleFavorite(btn) {
   localStorage.setItem('montgomery_saved', JSON.stringify(saved));
 }
 
+/* ==========================================
+   START SEARCHING BUTTON
+   ========================================== */
+
+function initStartSearching() {
+  const triggers = [
+    document.getElementById('explorePropertiesBtn'),
+    document.getElementById('heroScrollIndicator'),
+    document.getElementById('startSearchingBtn')
+  ].filter(Boolean);
+
+  triggers.forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      const searchSec = document.getElementById('search');
+      if (searchSec) {
+        searchSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => {
+          document.getElementById('searchLocation')?.focus();
+        }, 500);
+      }
+    });
+  });
+}
+
+/* ==========================================
+   SCROLL REVEAL
+   ========================================== */
+
+function initScrollReveal() {
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    threshold: 0.08,
+    rootMargin: '0px 0px -30px 0px'
+  });
+
+  // Observe elements with .reveal
+  const revealElements = document.querySelectorAll('.reveal, .section-header, .category-card, .feature-card, .agent-card');
+  revealElements.forEach(el => {
+    el.classList.add('reveal');
+    observer.observe(el);
+  });
+
+  // Re-observe after property render
+  setTimeout(() => {
+    document.querySelectorAll('.property-card.reveal:not(.visible)').forEach(el => {
+      observer.observe(el);
+    });
+  }, 100);
+}
+
