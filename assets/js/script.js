@@ -930,3 +930,68 @@ function initScrollReveal() {
   }, 100);
 }
 
+/* ==========================================
+   TOAST NOTIFICATION SYSTEM
+   ========================================== */
+
+function showToast(message) {
+  let toast = document.getElementById('montgomeryToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'montgomeryToast';
+    toast.style.cssText = `
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: var(--color-bg-card);
+      border: 1px solid var(--color-gold);
+      color: var(--color-text-primary);
+      padding: 14px 20px;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: var(--fs-small);
+      font-family: var(--font-body);
+      max-width: 380px;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+    `;
+    document.body.appendChild(toast);
+  }
+
+  toast.innerHTML = `
+    <span class="material-symbols-rounded" style="color: var(--color-gold); font-size: 22px;" aria-hidden="true">check_circle</span>
+    <span>${escapeHtml(message)}</span>
+  `;
+  toast.style.opacity = '1';
+  toast.style.transform = 'translateY(0)';
+
+  clearTimeout(toast.timeoutId);
+  toast.timeoutId = setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(12px)';
+  }, 3800);
+}
+
+/* ==========================================
+   UTILITY FUNCTIONS
+   ========================================== */
+
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
