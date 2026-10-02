@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 
     <script src="./assets/js/script.js" defer></script>
+    <script src="./assets/js/auth.js" defer></script>
   </head>
   <body>
 
@@ -256,7 +257,7 @@
                 <span class="material-symbols-rounded" aria-hidden="true">house</span>
               </div>
               <h3 class="category-title">Luxury Houses</h3>
-              <p class="category-count">12 Properties</p>
+              <p class="category-count">10 Properties</p>
             </a>
 
             <a href="#properties" class="category-card" data-category="apartment">
@@ -264,15 +265,15 @@
                 <span class="material-symbols-rounded" aria-hidden="true">apartment</span>
               </div>
               <h3 class="category-title">Modern Apartments</h3>
-              <p class="category-count">8 Properties</p>
+              <p class="category-count">10 Properties</p>
             </a>
 
-            <a href="#properties" class="category-card" data-category="villa">
+            <a href="#properties" class="category-card" data-category="sale">
               <div class="category-icon">
-                <span class="material-symbols-rounded" aria-hidden="true">villa</span>
+                <span class="material-symbols-rounded" aria-hidden="true">sell</span>
               </div>
-              <h3 class="category-title">Family Homes</h3>
-              <p class="category-count">6 Properties</p>
+              <h3 class="category-title">Properties For Sale</h3>
+              <p class="category-count">10 Properties</p>
             </a>
 
             <a href="#properties" class="category-card" data-category="rent">
@@ -432,6 +433,99 @@
 
         <div class="modal-body" id="modalBody">
           <!-- Content populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== EXACT ANIMATED LOGIN & SIGNUP MODAL ==================== -->
+    <div class="auth-modal-backdrop" id="authModalBackdrop" role="dialog" aria-modal="true" aria-labelledby="authModalTitle" style="display:none;">
+      <div class="auth-modal-wrapper">
+        <!-- Close button positioned outside the glowing card -->
+        <button type="button" class="auth-modal-close" id="authModalCloseBtn" aria-label="Close login dialog">
+          <span class="material-symbols-rounded" aria-hidden="true">close</span>
+        </button>
+
+        <div class="container animated-auth-box" id="animatedAuthBox">
+          <!-- Curved background shapes (Red-orange diagonal glow) -->
+          <div class="curved-shape" aria-hidden="true"></div>
+          <div class="curved-shape2" aria-hidden="true"></div>
+
+          <!-- LOGIN FORM (Left Panel) -->
+          <div class="form-box Login">
+            <h2 class="animation" id="authModalTitle" style="--D:0; --li:21; --S:0;">Login</h2>
+            <form id="animatedLoginForm" novalidate>
+              <div class="input-box animation" style="--D:1; --li:20; --S:1;">
+                <input type="text" id="animatedLoginUser" required autocomplete="username">
+                <label for="animatedLoginUser">Username</label>
+                <span class="material-symbols-rounded input-ico" aria-hidden="true">person</span>
+              </div>
+
+              <div class="input-box animation" style="--D:2; --li:19; --S:2;">
+                <input type="password" id="animatedLoginPass" required autocomplete="current-password">
+                <label for="animatedLoginPass">Password</label>
+                <span class="material-symbols-rounded input-ico" aria-hidden="true">lock</span>
+              </div>
+
+              <div class="animated-auth-feedback" id="animatedLoginFeedback"></div>
+
+              <button type="submit" class="btn animation" id="animatedLoginBtn" style="--D:3; --li:18; --S:3;">
+                <span class="btn-text">Login</span>
+                <span class="btn-loader" style="display:none;"></span>
+              </button>
+
+              <div class="regi-link animation" style="--D:4; --li:17; --S:4;">
+                <p>Don't have an account? <a href="#" class="SignUpLink" id="toggleToRegister">Sign Up</a></p>
+              </div>
+            </form>
+          </div>
+
+          <!-- LOGIN INFO (Right Panel) -->
+          <div class="info-content Login">
+            <h2 class="animation" style="--D:0; --li:21; --S:0;">WELCOME<br>BACK!</h2>
+            <p class="animation" style="--D:1; --li:20; --S:1;">We are happy to have you with us again. If you need anything, we are here to help.</p>
+          </div>
+
+          <!-- REGISTER FORM (Right Panel) -->
+          <div class="form-box Register">
+            <h2 class="animation" style="--li:17; --D:0; --S:0;">Sign Up</h2>
+            <form id="animatedRegisterForm" novalidate>
+              <div class="input-box animation" style="--li:18; --D:1; --S:1;">
+                <input type="text" id="animatedRegUser" required autocomplete="name">
+                <label for="animatedRegUser">Username</label>
+                <span class="material-symbols-rounded input-ico" aria-hidden="true">person</span>
+              </div>
+
+              <div class="input-box animation" style="--li:19; --D:2; --S:2;">
+                <input type="email" id="animatedRegEmail" required autocomplete="email">
+                <label for="animatedRegEmail">Email</label>
+                <span class="material-symbols-rounded input-ico" aria-hidden="true">mail</span>
+              </div>
+
+              <div class="input-box animation" style="--li:20; --D:3; --S:3;">
+                <input type="password" id="animatedRegPass" required autocomplete="new-password">
+                <label for="animatedRegPass">Password</label>
+                <span class="material-symbols-rounded input-ico" aria-hidden="true">lock</span>
+              </div>
+
+              <div class="animated-auth-feedback" id="animatedRegFeedback"></div>
+
+              <button type="submit" class="btn animation" id="animatedRegBtn" style="--li:21; --D:4; --S:4;">
+                <span class="btn-text">Sign Up</span>
+                <span class="btn-loader" style="display:none;"></span>
+              </button>
+
+              <div class="regi-link animation" style="--li:22; --D:5; --S:5;">
+                <p>Already have an account? <a href="#" class="SignInLink" id="toggleToLogin">Sign In</a></p>
+              </div>
+            </form>
+          </div>
+
+          <!-- REGISTER INFO (Left Panel) -->
+          <div class="info-content Register">
+            <h2 class="animation" style="--li:17; --D:0; --S:0;">WELCOME!</h2>
+            <p class="animation" style="--li:18; --D:1; --S:1;">We are happy to have you join us. If you need anything, we are here to help.</p>
+          </div>
+
         </div>
       </div>
     </div>
