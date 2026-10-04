@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="author" content="Sauryaman Bisen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="List your property on MONTGOMERY. Connect with verified buyers and renters through our platform.">
+    <title>Sell Your Property | MONTGOMERY</title>
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0..1,0" />
+    <link rel="stylesheet" href="./assets/css/style.css">
+  </head>
+  <body class="sell-page">
+
+    <!-- Header -->
+    <header class="header" id="header" data-header>
+      <div class="container header-container">
+        <a href="index.html" class="logo" aria-label="MONTGOMERY Home">
+          <svg class="logo-icon" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M16 2.5 L30.5 15.5 L27 19 L16 9.5 L5 19 L1.5 15.5 Z" fill="currentColor"/>
+            <path d="M16 13.5 L24 20.5 V30 H19 V21 H13 V30 H8 V20.5 Z" fill="currentColor"/>
+          </svg>
+          <span class="logo-text">MONTGOMERY</span>
+        </a>
+        <nav class="navbar" id="navbar" data-navbar>
+          <ul class="navbar-list">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="index.html#properties" class="nav-link">Rent</a></li>
+            <li><a href="sell.html" class="nav-link active">Sell</a></li>
+            <li><a href="index.html#agents" class="nav-link">Agents</a></li>
+          </ul>
+          <div class="navbar-actions">
+            <a href="register.html" class="nav-action-link">Register</a>
+            <span class="nav-action-divider" aria-hidden="true">|</span>
+            <a href="signin.html" class="nav-action-link nav-action-signin">Sign In</a>
+            <span class="nav-action-divider" aria-hidden="true">|</span>
+          </div>
+          <div class="navbar-contact">
+            <a href="mailto:hello@montgomery.com" class="nav-contact-btn" aria-label="Email us"><span class="material-symbols-rounded" aria-hidden="true">mail</span></a>
+            <a href="tel:+1234567890" class="nav-contact-btn" aria-label="Call us"><span class="material-symbols-rounded" aria-hidden="true">call</span></a>
+          </div>
+        </nav>
+        <button class="nav-toggle-btn" aria-label="Toggle navigation menu" data-nav-toggler>
+          <span class="material-symbols-rounded open" aria-hidden="true">menu</span>
+          <span class="material-symbols-rounded close" aria-hidden="true">close</span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="sell-hero">
+        <div class="container">
+          <div class="section-header section-header-center">
+            <p class="section-subtitle">List Your Property</p>
+            <h1 class="section-title">Sell or Rent Your Property</h1>
+            <p class="sell-hero-description">Publish your listing to our marketplace. Enter property details and upload photos below.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="sell-form-section">
+        <div class="container">
+          <form class="sell-form" id="sellForm" novalidate>
+
+            <fieldset class="form-fieldset">
+              <legend class="fieldset-legend">Property Information</legend>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="sellTitle" class="form-label">Property Title *</label>
+                  <input type="text" id="sellTitle" class="form-input" placeholder="e.g. Modern 3BR Villa with Pool" required>
+                  <span class="form-error" id="sellTitleError"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="sellType" class="form-label">Property Type *</label>
+                  <select id="sellType" class="form-input form-select" required>
+                    <option value="">Select type</option>
+                    <option value="house">House</option>
+                    <option value="apartment">Apartment</option>
+                    <option value="villa">Villa</option>
+                    <option value="townhouse">Townhouse</option>
+                    <option value="penthouse">Penthouse</option>
+                  </select>
+                  <span class="form-error" id="sellTypeError"></span>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="sellLocation" class="form-label">Location *</label>
+                  <input type="text" id="sellLocation" class="form-input" placeholder="Full address or area" required>
+                  <span class="form-error" id="sellLocationError"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="sellPrice" class="form-label">Asking Price (USD) *</label>
+                  <input type="number" id="sellPrice" class="form-input" placeholder="e.g. 450000" min="1" required>
+                  <span class="form-error" id="sellPriceError"></span>
+                </div>
+              </div>
+
+              <div class="form-row form-row-3">
+                <div class="form-group">
+                  <label for="sellBedrooms" class="form-label">Bedrooms *</label>
+                  <input type="number" id="sellBedrooms" class="form-input" placeholder="e.g. 3" min="0" required>
+                  <span class="form-error" id="sellBedroomsError"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="sellBathrooms" class="form-label">Bathrooms *</label>
+                  <input type="number" id="sellBathrooms" class="form-input" placeholder="e.g. 2" min="0" required>
+                  <span class="form-error" id="sellBathroomsError"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="sellArea" class="form-label">Area (sqft) *</label>
+                  <input type="number" id="sellArea" class="form-input" placeholder="e.g. 1800" min="1" required>
+                  <span class="form-error" id="sellAreaError"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="sellDescription" class="form-label">Description</label>
+                <textarea id="sellDescription" class="form-input form-textarea" placeholder="Describe layout, recent renovations, architectural details, and included amenities..." rows="5"></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="sellImages" class="form-label">Property Images</label>
+                <div class="file-upload" id="fileUploadArea">
+                  <span class="material-symbols-rounded file-upload-icon" aria-hidden="true">cloud_upload</span>
+                  <p class="file-upload-text">Drag and drop images here, or <span class="file-upload-link">browse</span></p>
+                  <p class="file-upload-hint">JPEG, PNG, or WebP (max 5MB each)</p>
+                  <input type="file" id="sellImages" class="file-input" accept="image/*" multiple>
+                </div>
+                <div class="file-preview" id="filePreview"></div>
+              </div>
+            </fieldset>
+
+            <fieldset class="form-fieldset">
+              <legend class="fieldset-legend">Contact Information</legend>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="sellContactName" class="form-label">Your Name *</label>
+                  <input type="text" id="sellContactName" class="form-input" placeholder="Full name" required>
+                  <span class="form-error" id="sellContactNameError"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="sellContactEmail" class="form-label">Email Address *</label>
+                  <input type="email" id="sellContactEmail" class="form-input" placeholder="you@example.com" required>
+                  <span class="form-error" id="sellContactEmailError"></span>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="sellContactPhone" class="form-label">Phone Number</label>
+                <input type="tel" id="sellContactPhone" class="form-input" placeholder="+1 (555) 123-4567">
+              </div>
+            </fieldset>
+
+            <div class="form-status" id="sellStatus"></div>
+
+            <div class="sell-form-actions">
+              <button type="submit" class="btn btn-primary btn-full" id="sellSubmit">
+                <span class="btn-text">Submit Property</span>
+                <span class="btn-loader" style="display:none;"></span>
+              </button>
+              <p class="demo-notice">Prototype interface: listings are saved locally in your browser for demonstration.</p>
+            </div>
+
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer">
+      <div class="container">
+        <div class="footer-bottom">
+          <p class="footer-copyright">&copy; 2026 MONTGOMERY. Built by Sauryaman Bisen. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./assets/js/script.js" defer></script>
+    <script src="./assets/js/sell.js" defer></script>
+  </body>
+</html>
