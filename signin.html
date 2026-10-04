@@ -27,49 +27,88 @@
       </div>
     </header>
 
-    <main class="auth-main">
-      <div class="auth-container">
-        <div class="auth-card">
-          <div class="auth-header">
-            <h1 class="auth-title">Welcome Back</h1>
-            <p class="auth-subtitle">Sign in to access your account and saved properties.</p>
-          </div>
+    <main class="auth-page-animated">
+      <div class="container animated-auth-box" id="animatedAuthBox">
+        <!-- Curved background shapes (Red-orange diagonal glow) -->
+        <div class="curved-shape" aria-hidden="true"></div>
+        <div class="curved-shape2" aria-hidden="true"></div>
 
-          <form class="auth-form" id="signinForm" novalidate>
-            <div class="form-group">
-              <label for="signinEmail" class="form-label">Email Address</label>
-              <div class="input-wrapper">
-                <span class="material-symbols-rounded input-icon" aria-hidden="true">mail</span>
-                <input type="email" id="signinEmail" class="form-input" placeholder="you@example.com" required autocomplete="email">
-              </div>
-              <span class="form-error" id="signinEmailError"></span>
+        <!-- LOGIN FORM (Left Panel) -->
+        <div class="form-box Login">
+          <h2 class="animation" style="--D:0; --li:21; --S:0;">Login</h2>
+          <form id="animatedLoginForm" novalidate>
+            <div class="input-box animation" style="--D:1; --li:20; --S:1;">
+              <input type="text" id="animatedLoginUser" required autocomplete="username">
+              <label for="animatedLoginUser">Username</label>
+              <span class="material-symbols-rounded input-ico" aria-hidden="true">person</span>
             </div>
 
-            <div class="form-group">
-              <label for="signinPassword" class="form-label">Password</label>
-              <div class="input-wrapper">
-                <span class="material-symbols-rounded input-icon" aria-hidden="true">lock</span>
-                <input type="password" id="signinPassword" class="form-input" placeholder="Enter your password" required autocomplete="current-password">
-                <button type="button" class="password-toggle" aria-label="Toggle password visibility" data-toggle-password="signinPassword">
-                  <span class="material-symbols-rounded" aria-hidden="true">visibility</span>
-                </button>
-              </div>
-              <span class="form-error" id="signinPasswordError"></span>
+            <div class="input-box animation" style="--D:2; --li:19; --S:2;">
+              <input type="password" id="animatedLoginPass" required autocomplete="current-password">
+              <label for="animatedLoginPass">Password</label>
+              <span class="material-symbols-rounded input-ico" aria-hidden="true">lock</span>
             </div>
 
-            <div class="form-status" id="signinStatus"></div>
+            <div class="animated-auth-feedback" id="animatedLoginFeedback"></div>
 
-            <button type="submit" class="btn btn-primary btn-full" id="signinSubmit">
-              <span class="btn-text">Sign In</span>
+            <button type="submit" class="btn animation" id="animatedLoginBtn" style="--D:3; --li:18; --S:3;">
+              <span class="btn-text">Login</span>
               <span class="btn-loader" style="display:none;"></span>
             </button>
-          </form>
 
-          <p class="auth-footer-text">
-            Don't have an account? <a href="register.html" class="auth-link">Register here</a>
-          </p>
-          <p class="demo-notice auth-demo-notice">This is a prototype interface. No real authentication is configured.</p>
+              <div class="regi-link animation" style="--D:4; --li:17; --S:4;">
+                <p>Don't have an account? <a href="#" class="SignUpLink" id="toggleToRegister">Sign Up</a></p>
+              </div>
+            </form>
         </div>
+
+        <!-- LOGIN INFO (Right Panel) -->
+        <div class="info-content Login">
+          <h2 class="animation" style="--D:0; --li:21; --S:0;">WELCOME<br>BACK!</h2>
+          <p class="animation" style="--D:1; --li:20; --S:1;">We are happy to have you with us again. If you need anything, we are here to help.</p>
+        </div>
+
+        <!-- REGISTER FORM (Right Panel) -->
+        <div class="form-box Register">
+          <h2 class="animation" style="--li:17; --D:0; --S:0;">Sign Up</h2>
+          <form id="animatedRegisterForm" novalidate>
+            <div class="input-box animation" style="--li:18; --D:1; --S:1;">
+              <input type="text" id="animatedRegUser" required autocomplete="name">
+              <label for="animatedRegUser">Username</label>
+              <span class="material-symbols-rounded input-ico" aria-hidden="true">person</span>
+            </div>
+
+            <div class="input-box animation" style="--li:19; --D:2; --S:2;">
+              <input type="email" id="animatedRegEmail" required autocomplete="email">
+              <label for="animatedRegEmail">Email</label>
+              <span class="material-symbols-rounded input-ico" aria-hidden="true">mail</span>
+            </div>
+
+            <div class="input-box animation" style="--li:20; --D:3; --S:3;">
+              <input type="password" id="animatedRegPass" required autocomplete="new-password">
+              <label for="animatedRegPass">Password</label>
+              <span class="material-symbols-rounded input-ico" aria-hidden="true">lock</span>
+            </div>
+
+            <div class="animated-auth-feedback" id="animatedRegFeedback"></div>
+
+            <button type="submit" class="btn animation" id="animatedRegBtn" style="--li:21; --D:4; --S:4;">
+              <span class="btn-text">Sign Up</span>
+              <span class="btn-loader" style="display:none;"></span>
+            </button>
+
+            <div class="regi-link animation" style="--li:22; --D:5; --S:5;">
+              <p>Already have an account? <a href="#" class="SignInLink" id="toggleToLogin">Sign In</a></p>
+            </div>
+          </form>
+        </div>
+
+        <!-- REGISTER INFO (Left Panel) -->
+        <div class="info-content Register">
+          <h2 class="animation" style="--li:17; --D:0; --S:0;">WELCOME!</h2>
+          <p class="animation" style="--li:18; --D:1; --S:1;">We are happy to have you join us. If you need anything, we are here to help.</p>
+        </div>
+
       </div>
     </main>
 

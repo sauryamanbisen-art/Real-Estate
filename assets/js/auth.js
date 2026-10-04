@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initPasswordToggles();
   initSignInForm();
   initRegisterForm();
+  initExactAnimatedAuth();
   updateHeaderAuthUI();
 });
 
@@ -423,3 +424,253 @@ function escapeHtml(str) {
   div.textContent = str || '';
   return div.innerHTML;
 }
+
+/* ==========================================
+   EXACT ANIMATED LOGIN & REGISTER (MODAL & STANDALONE)
+   ========================================== */
+
+function initExactAnimatedAuth() {
+  const modalBackdrop = document.getElementById('authModalBackdrop');
+  const authBox = document.getElementById('animatedAuthBox');
+  const closeBtn = document.getElementById('authModalCloseBtn');
+  const toggleToRegister = document.getElementById('toggleToRegister');
+  const toggleToLogin = document.getElementById('toggleToLogin');
+  const loginForm = document.getElementById('animatedLoginForm');
+  const registerForm = document.getElementById('animatedRegisterForm');
+
+  // Support standalone card on signin.html & register.html as well
+  const standaloneBox = document.querySelector('.auth-page-animated .animated-auth-box');
+  const targetBox = authBox || standaloneBox;
+
+  // Toggle animation between Login and Register
+  if (toggleToRegister && targetBox) {
+    toggleToRegister.addEventListener('click', (e) => {
+      e.preventDefault();
+      targetBox.classList.add('active');
+    });
+  }
+
+  if (toggleToLogin && targetBox) {
+    toggleToLogin.addEventListener('click', (e) => {
+      e.preventDefault();
+      targetBox.classList.remove('active');
+    });
+  }
+
+  // Modal open/close handlers
+  function openModal(mode = 'login') {
+    if (!modalBackdrop) return;
+    if (targetBox) {
+      if (mode === 'register') {
+        targetBox.classList.add('active');
+      } else {
+        targetBox.classList.remove('active');
+      }
+    }
+    modalBackdrop.style.display = 'flex';
+    // Trigger CSS opacity transition on next paint
+    requestAnimationFrame(() => {
+      modalBackdrop.classList.add('is-open');
+    });
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    if (!modalBackdrop) return;
+    modalBackdrop.classList.remove('is-open');
+    setTimeout(() => {
+      modalBackdrop.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 350);
+  }
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+
+  if (modalBackdrop) {
+    modalBackdrop.addEventListener('click', (e) => {
+      if (e.target === modalBackdrop) {
+        closeModal();
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalBackdrop.classList.contains('is-open')) {
+        closeModal();
+      }
+    });
+  }
+
+  // Intercept all signin and register links on index.html
+  const authLinks = document.querySelectorAll('a[href*="signin.html"], a[href*="register.html"]');
+  authLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      if (modalBackdrop) {
+        e.preventDefault();
+        const href = link.getAttribute('href') || '';
+        openModal(href.includes('register') ? 'register' : 'login');
+      }
+    });
+  });
+
+  // Track values for animated underline labels
+  const allInputs = document.querySelectorAll('.animated-auth-box .input-box input');
+  allInputs.forEach(input => {
+    const checkValue = () => {
+      if (input.value.trim().length > 0) {
+        input.classList.add('has-value');
+      } else {
+        input.classList.remove('has-value');
+      }
+    };
+    input.addEventListener('input', checkValue);
+    input.addEventListener('change', checkValue);
+    checkValue();
+  });
+
+  // Handle Animated Login form submit
+  if (loginForm) {
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const userInput = document.getElementById('animatedLoginUser');
+      const passInput = document.getElementById('animatedLoginPass');
+      const feedback = document.getElementById('animatedLoginFeedback');
+      const loginBtn = document.getElementById('animatedLoginBtn');
+
+      const identifier = userInput ? userInput.value.trim() : '';
+      const password = passInput ? passInput.value : '';
+
+      if (!identifier || !password) {
+        if (feedback) {
+          feedback.textContent = 'Please enter both username and password.';
+          feedback.className = 'animated-auth-feedback error';
+        }
+        return;
+      }
+
+      setButtonLoading(loginBtn, true);
+      if (feedback) feedback.textContent = '';
+
+      setTimeout(() => {
+        const users = getRegisteredUsers();
+        const user = users.find(u => 
+          (u.email && u.email.toLowerCase() === identifier.toLowerCase()) ||
+          (u.name && u.name.toLowerCase() === identifier.toLowerCase())
+        );
+
+        if (user && user.password === password) {
+          setCurrentUser(user);
+          if (feedback) {
+            feedback.textContent = `Welcome back, ${user.name}!`;
+            feedback.className = 'animated-auth-feedback success';
+          }
+          setTimeout(() => {
+            setButtonLoading(loginBtn, false);
+            if (modalBackdrop) {
+              closeModal();
+            }
+            if (window.location.pathname.includes('signin.html') || window.location.pathname.includes('register.html')) {
+              window.location.href = 'index.html';
+            }
+          }, 800);
+        } else {
+          setButtonLoading(loginBtn, false);
+          if (feedback) {
+            feedback.textContent = 'Invalid username or password.';
+            feedback.className = 'animated-auth-feedback error';
+          }
+        }
+      }, 500);
+    });
+  }
+
+  // Handle Animated Register form submit
+  if (registerForm) {
+    registerForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const userInput = document.getElementById('animatedRegUser');
+      const emailInput = document.getElementById('animatedRegEmail');
+      const passInput = document.getElementById('animatedRegPass');
+      const feedback = document.getElementById('animatedRegFeedback');
+      const regBtn = document.getElementById('animatedRegBtn');
+
+      const name = userInput ? userInput.value.trim() : '';
+      const email = emailInput ? emailInput.value.trim() : '';
+      const password = passInput ? passInput.value : '';
+
+      if (!name || !email || !password) {
+        if (feedback) {
+          feedback.textContent = 'Please fill out all fields.';
+          feedback.className = 'animated-auth-feedback error';
+        }
+        return;
+      }
+
+      if (!isValidEmail(email)) {
+        if (feedback) {
+          feedback.textContent = 'Please enter a valid email address.';
+          feedback.className = 'animated-auth-feedback error';
+        }
+        return;
+      }
+
+      if (password.length < 6) {
+        if (feedback) {
+          feedback.textContent = 'Password must be at least 6 characters.';
+          feedback.className = 'animated-auth-feedback error';
+        }
+        return;
+      }
+
+      const users = getRegisteredUsers();
+      if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
+        if (feedback) {
+          feedback.textContent = 'An account with this email already exists.';
+          feedback.className = 'animated-auth-feedback error';
+        }
+        return;
+      }
+
+      setButtonLoading(regBtn, true);
+      if (feedback) feedback.textContent = '';
+
+      setTimeout(() => {
+        const newUser = {
+          name,
+          email,
+          password,
+          registeredAt: new Date().toISOString()
+        };
+        users.push(newUser);
+        saveRegisteredUsers(users);
+        setCurrentUser(newUser);
+
+        if (feedback) {
+          feedback.textContent = `Account created! Welcome, ${name}!`;
+          feedback.className = 'animated-auth-feedback success';
+        }
+
+        setTimeout(() => {
+          setButtonLoading(regBtn, false);
+          if (modalBackdrop) {
+            closeModal();
+          }
+          if (window.location.pathname.includes('signin.html') || window.location.pathname.includes('register.html')) {
+            window.location.href = 'index.html';
+          }
+        }, 800);
+      }, 600);
+    });
+  }
+
+  // AUTOMATIC TRIGGER:
+  // "i want this exact login form when any user come on the webpage"
+  // When any user lands on the website (index.html), if not logged in, show this exact login modal!
+  if (modalBackdrop && !getCurrentUser()) {
+    setTimeout(() => {
+      openModal('login');
+    }, 450);
+  }
+}
+
