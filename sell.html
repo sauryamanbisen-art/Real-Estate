@@ -66,7 +66,26 @@
           <form class="sell-form" id="sellForm" novalidate>
 
             <fieldset class="form-fieldset">
-              <legend class="fieldset-legend">Property Information</legend>
+              <legend class="fieldset-legend">
+                <span class="material-symbols-rounded" aria-hidden="true">real_estate_agent</span>
+                Property Information
+              </legend>
+
+              <div class="form-group">
+                <label class="form-label">Listing Purpose *</label>
+                <div class="purpose-toggle-group">
+                  <label class="purpose-toggle-option active" id="purposeSaleOption">
+                    <input type="radio" name="sellPurpose" value="sale" checked>
+                    <span class="material-symbols-rounded" aria-hidden="true">sell</span>
+                    <span>For Sale</span>
+                  </label>
+                  <label class="purpose-toggle-option" id="purposeRentOption">
+                    <input type="radio" name="sellPurpose" value="rent">
+                    <span class="material-symbols-rounded" aria-hidden="true">key</span>
+                    <span>For Rent</span>
+                  </label>
+                </div>
+              </div>
 
               <div class="form-row">
                 <div class="form-group">
@@ -186,6 +205,7 @@
         </div>
       </div>
     </footer>
+
     <script src="./assets/js/sell.js" defer></script>
   </body>
 </html>
