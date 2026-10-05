@@ -19,6 +19,7 @@ let uploadedImageUrls = [];
 document.addEventListener('DOMContentLoaded', () => {
   initFileUpload();
   initSellForm();
+  initPurposeSelector();
   prefillUserInfo();
   updateSellHeaderAuth();
   initNavigation();
@@ -51,6 +52,45 @@ function initNavigation() {
       toggler.classList.remove('active');
       document.body.style.overflow = '';
     }
+  });
+}
+
+/* ==========================================
+   LISTING PURPOSE SELECTOR (BUY VS RENT)
+   ========================================== */
+
+function initPurposeSelector() {
+  const saleOpt = document.getElementById('purposeSaleOption');
+  const rentOpt = document.getElementById('purposeRentOption');
+  const priceLabel = document.querySelector('label[for="sellPrice"]');
+  const priceInput = document.getElementById('sellPrice');
+
+  const setPurpose = (purpose) => {
+    if (purpose === 'rent') {
+      rentOpt?.classList.add('active');
+      saleOpt?.classList.remove('active');
+      const radio = rentOpt?.querySelector('input');
+      if (radio) radio.checked = true;
+      if (priceLabel) priceLabel.textContent = 'Monthly Rent (USD) *';
+      if (priceInput) priceInput.placeholder = 'e.g. 5000';
+    } else {
+      saleOpt?.classList.add('active');
+      rentOpt?.classList.remove('active');
+      const radio = saleOpt?.querySelector('input');
+      if (radio) radio.checked = true;
+      if (priceLabel) priceLabel.textContent = 'Asking Price (USD) *';
+      if (priceInput) priceInput.placeholder = 'e.g. 450000';
+    }
+  };
+
+  saleOpt?.addEventListener('click', (e) => {
+    e.preventDefault();
+    setPurpose('sale');
+  });
+
+  rentOpt?.addEventListener('click', (e) => {
+    e.preventDefault();
+    setPurpose('rent');
   });
 }
 
@@ -275,6 +315,7 @@ function initSellForm() {
       const contactName = document.getElementById('sellContactName').value.trim();
       const contactEmail = document.getElementById('sellContactEmail').value.trim();
       const contactPhone = document.getElementById('sellContactPhone')?.value.trim();
+      const purpose = document.querySelector('input[name="sellPurpose"]:checked')?.value || 'sale';
 
       const newListing = {
         id: Date.now(),
@@ -282,7 +323,7 @@ function initSellForm() {
         location,
         price,
         type,
-        purpose: 'sale',
+        purpose,
         bedrooms,
         bathrooms,
         area,
