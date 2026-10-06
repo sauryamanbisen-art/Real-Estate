@@ -262,3 +262,5 @@
     initCalculatorDOM();
   });
 })();
+
+// Exported for luxury real estate mortgage calculations
