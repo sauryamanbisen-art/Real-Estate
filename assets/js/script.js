@@ -1108,6 +1108,9 @@ function toggleFavorite(btn) {
   }
 
   localStorage.setItem('montgomery_saved', JSON.stringify(saved));
+  if (typeof updateSavedBadge === 'function') {
+    updateSavedBadge();
+  }
 }
 
 /* ==========================================

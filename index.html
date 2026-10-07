@@ -22,9 +22,11 @@
     <link rel="stylesheet" href="./assets/css/auth.css">
     <link rel="stylesheet" href="./assets/css/calculator.css">
     <link rel="stylesheet" href="./assets/css/compare.css">
+    <link rel="stylesheet" href="./assets/css/saved.css">
 
     <script src="./assets/js/calculator.js" defer></script>
     <script src="./assets/js/compare.js" defer></script>
+    <script src="./assets/js/saved.js" defer></script>
 
     <script src="./assets/js/script.js" defer></script>
     <script src="./assets/js/auth.js" defer></script>
@@ -52,6 +54,12 @@
           </ul>
 
           <div class="navbar-actions">
+            <!-- Saved Shortlist Trigger -->
+            <button type="button" class="saved-nav-btn" onclick="openSavedDrawer();" aria-label="View saved properties" title="Shortlisted Properties">
+              <span class="material-symbols-rounded" aria-hidden="true">favorite</span>
+              <span>Saved</span>
+              <span class="saved-count-badge" id="headerSavedBadge" style="display:none;">0</span>
+            </button>
             <a href="register.html" class="nav-action-link">Register</a>
             <span class="nav-action-divider" aria-hidden="true">|</span>
             <a href="signin.html" class="nav-action-link">Sign In</a>
