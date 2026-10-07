@@ -599,7 +599,7 @@ function renderProperties(list) {
   // Attach card click handlers
   grid.querySelectorAll('.property-card').forEach(card => {
     card.addEventListener('click', (e) => {
-      if (e.target.closest('.property-favorite')) return;
+      if (e.target.closest('.property-favorite') || e.target.closest('.property-compare-btn')) return;
       const id = parseInt(card.dataset.id);
       openPropertyModal(id);
     });
@@ -637,6 +637,9 @@ function createPropertyCard(p) {
         <img src="${p.image}" alt="${p.title}" width="400" height="275" loading="lazy"
              onerror="this.src='./assets/images/property-1.jpg'">
         <span class="property-badge ${badgeClass}">${badgeText}</span>
+        <button type="button" class="property-compare-btn" data-property-id="${p.id}" onclick="event.stopPropagation(); toggleCompare(${p.id});" aria-label="Compare property" title="Compare side-by-side">
+          <span class="material-symbols-rounded" aria-hidden="true">compare_arrows</span>
+        </button>
         <button class="property-favorite ${saved ? 'saved' : ''}" aria-label="${saved ? 'Remove from saved' : 'Save property'}" data-property-id="${p.id}">
           <span class="material-symbols-rounded" aria-hidden="true">${saved ? 'favorite' : 'favorite_border'}</span>
         </button>
