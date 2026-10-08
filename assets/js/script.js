@@ -624,9 +624,11 @@ function renderProperties(list) {
 
 function createPropertyCard(p) {
   const isRental = p.purpose === 'rent';
-  const priceStr = isRental
-    ? `$${p.price.toLocaleString()}<span class="property-price-period">/mo</span>`
-    : `$${p.price.toLocaleString()}`;
+  const priceStr = window.formatCurrency
+    ? window.formatCurrency(p.price, isRental)
+    : (isRental
+        ? `${p.price.toLocaleString()}<span class="property-price-period">/mo</span>`
+        : `${p.price.toLocaleString()}`);
   const badgeClass = isRental ? 'badge-rent' : 'badge-sale';
   const badgeText = p.badge || (isRental ? 'For Rent' : 'For Sale');
   const saved = getSavedProperties().includes(p.id);
@@ -900,9 +902,11 @@ function openPropertyModal(id) {
   if (!modal || !body) return;
 
   const isRental = property.purpose === 'rent';
-  const priceStr = isRental
-    ? `$${property.price.toLocaleString()}/mo`
-    : `$${property.price.toLocaleString()}`;
+  const priceStr = window.formatCurrency
+    ? window.formatCurrency(property.price, isRental)
+    : (isRental
+        ? `${property.price.toLocaleString()}/mo`
+        : `${property.price.toLocaleString()}`);
 
   body.innerHTML = `
     <div class="modal-gallery">
