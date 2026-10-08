@@ -29,7 +29,6 @@
     <script src="./assets/js/calculator.js" defer></script>
     <script src="./assets/js/compare.js" defer></script>
     <script src="./assets/js/saved.js" defer></script>
-
     <script src="./assets/js/script.js" defer></script>
     <script src="./assets/js/auth.js" defer></script>
   </head>
@@ -62,10 +61,18 @@
               <span>Saved</span>
               <span class="saved-count-badge" id="headerSavedBadge" style="display:none;">0</span>
             </button>
-            <a href="register.html" class="nav-action-link">Register</a>
-            <span class="nav-action-divider" aria-hidden="true">|</span>
-            <a href="signin.html" class="nav-action-link">Sign In</a>
-            <span class="nav-action-divider nav-action-divider-end" aria-hidden="true">|</span>
+
+            <!-- Currency Switcher -->
+            <div class="currency-switcher" role="radiogroup" aria-label="Currency Switcher">
+              <button type="button" class="currency-btn active" data-currency="USD" aria-label="US Dollar">$ USD</button>
+              <button type="button" class="currency-btn" data-currency="INR" aria-label="Indian Rupee">₹ INR</button>
+            </div>
+
+            <div class="navbar-auth-state" id="navbarAuthState" style="display:inline-flex; align-items:center; gap:8px;">
+              <a href="register.html" class="nav-action-link">Register</a>
+              <span class="nav-action-divider" aria-hidden="true">|</span>
+              <a href="signin.html" class="nav-action-link">Sign In</a>
+            </div>
           </div>
 
           <div class="navbar-contact">
@@ -247,6 +254,16 @@
             <button class="filter-btn" data-filter="rent">For Rent</button>
             <button class="filter-btn" data-filter="apartment">Apartments</button>
             <button class="filter-btn" data-filter="house">Houses</button>
+          </div>
+
+          <div class="results-meta-bar" style="display: flex; justify-content: space-between; align-items: center; margin: var(--space-md) 0 var(--space-lg); color: var(--color-text-secondary); font-size: var(--fs-small); flex-wrap: wrap; gap: 10px;">
+            <span id="propertyResultsCount" style="font-weight: var(--fw-medium); color: var(--color-text-primary);">Showing all listings</span>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <button type="button" class="btn btn-outline" style="padding: 6px 14px; font-size: var(--fs-xs); display: inline-flex; align-items: center; gap: 6px;" onclick="openMortgageCalculator();">
+                <span class="material-symbols-rounded" style="font-size: 16px; color: var(--color-gold);" aria-hidden="true">calculate</span>
+                <span>Mortgage &amp; EMI Estimator</span>
+              </button>
+            </div>
           </div>
 
           <div class="property-grid" id="propertyGrid">

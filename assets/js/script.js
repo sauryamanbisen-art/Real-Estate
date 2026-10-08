@@ -441,11 +441,11 @@ if (document.readyState === 'loading') {
 function updateHeaderAuth() {
   try {
     const user = JSON.parse(localStorage.getItem('montgomery_current_user') || 'null');
-    const actions = document.querySelector('.navbar-actions');
-    if (!actions || !user) return;
+    const authContainer = document.getElementById('navbarAuthState') || document.querySelector('.navbar-actions');
+    if (!authContainer || !user) return;
 
     const firstName = user.name ? user.name.split(' ')[0] : 'Member';
-    actions.innerHTML = `
+    authContainer.innerHTML = `
       <span class="user-greeting" style="color: var(--color-gold); font-size: var(--fs-small); font-weight: var(--fw-medium); display: flex; align-items: center; gap: 6px;">
         <span class="material-symbols-rounded" style="font-size: 20px;" aria-hidden="true">account_circle</span>
         <span>${escapeHtml(firstName)}</span>
@@ -580,9 +580,16 @@ function initHeader() {
    RENDER PROPERTIES
    ========================================== */
 
+let currentRenderedList = [];
+
 function renderProperties(list) {
+  currentRenderedList = list;
   const grid = document.getElementById('propertyGrid');
   const empty = document.getElementById('propertyEmpty');
+  const countEl = document.getElementById('propertyResultsCount');
+  if (countEl) {
+    countEl.textContent = `Showing ${list.length} ${list.length === 1 ? 'property' : 'properties'}`;
+  }
   if (!grid) return;
 
   if (list.length === 0) {
@@ -613,6 +620,10 @@ function renderProperties(list) {
     });
   });
 
+  if (typeof updateCompareButtons === 'function') {
+    updateCompareButtons();
+  }
+
   // Ensure newly rendered cards become visible smoothly
   requestAnimationFrame(() => {
     grid.querySelectorAll('.property-card').forEach((card, index) => {
@@ -622,13 +633,17 @@ function renderProperties(list) {
   });
 }
 
+window.refreshPropertyView = function () {
+  renderProperties(currentRenderedList.length > 0 ? currentRenderedList : getAllProperties());
+};
+
 function createPropertyCard(p) {
   const isRental = p.purpose === 'rent';
   const priceStr = window.formatCurrency
     ? window.formatCurrency(p.price, isRental)
     : (isRental
-        ? `${p.price.toLocaleString()}<span class="property-price-period">/mo</span>`
-        : `${p.price.toLocaleString()}`);
+        ? `$${p.price.toLocaleString()}<span class="property-price-period">/mo</span>`
+        : `$${p.price.toLocaleString()}`);
   const badgeClass = isRental ? 'badge-rent' : 'badge-sale';
   const badgeText = p.badge || (isRental ? 'For Rent' : 'For Sale');
   const saved = getSavedProperties().includes(p.id);
@@ -636,12 +651,12 @@ function createPropertyCard(p) {
   return `
     <article class="property-card reveal" data-id="${p.id}" data-type="${p.type}" data-purpose="${p.purpose}">
       <div class="property-card-image">
-        <img src="${p.image}" alt="${p.title}" width="400" height="275" loading="lazy"
+        <img src="${p.image}" alt="${escapeHtml(p.title)}" width="400" height="275" loading="lazy"
              onerror="this.src='./assets/images/property-1.jpg'">
-        <span class="property-badge ${badgeClass}">${badgeText}</span>
         <button type="button" class="property-compare-btn" data-property-id="${p.id}" onclick="event.stopPropagation(); toggleCompare(${p.id});" aria-label="Compare property" title="Compare side-by-side">
           <span class="material-symbols-rounded" aria-hidden="true">compare_arrows</span>
         </button>
+        <span class="property-badge ${badgeClass}">${badgeText}</span>
         <button class="property-favorite ${saved ? 'saved' : ''}" aria-label="${saved ? 'Remove from saved' : 'Save property'}" data-property-id="${p.id}">
           <span class="material-symbols-rounded" aria-hidden="true">${saved ? 'favorite' : 'favorite_border'}</span>
         </button>
@@ -905,8 +920,8 @@ function openPropertyModal(id) {
   const priceStr = window.formatCurrency
     ? window.formatCurrency(property.price, isRental)
     : (isRental
-        ? `${property.price.toLocaleString()}/mo`
-        : `${property.price.toLocaleString()}`);
+        ? `$${property.price.toLocaleString()}/mo`
+        : `$${property.price.toLocaleString()}`);
 
   body.innerHTML = `
     <div class="modal-gallery">
@@ -923,6 +938,13 @@ function openPropertyModal(id) {
       <div class="modal-price-row">
         <span class="modal-price">${priceStr}</span>
         <span class="modal-status status-available">Available</span>
+      </div>
+
+      <div style="margin: 6px 0 16px;">
+        <button type="button" class="modal-calc-trigger" onclick="openMortgageCalculator(${property.price}, '${escapeHtml(property.title).replace(/'/g, "\\'")}');">
+          <span class="material-symbols-rounded" aria-hidden="true">calculate</span>
+          <span>Calculate Monthly Mortgage / EMI</span>
+        </button>
       </div>
 
       <div class="modal-meta">
