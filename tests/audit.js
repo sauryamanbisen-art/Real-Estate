@@ -9,7 +9,17 @@ const path = require('path');
 const rootDir = path.resolve(__dirname, '..');
 
 console.log('=== [1] SYNTAX AUDIT ===');
-['assets/js/script.js', 'assets/js/auth.js', 'assets/js/sell.js'].forEach(relPath => {
+const allScripts = [
+  'assets/js/script.js',
+  'assets/js/auth.js',
+  'assets/js/sell.js',
+  'assets/js/currency.js',
+  'assets/js/calculator.js',
+  'assets/js/compare.js',
+  'assets/js/saved.js'
+];
+
+allScripts.forEach(relPath => {
   const file = path.join(rootDir, relPath);
   try {
     const code = fs.readFileSync(file, 'utf8');
@@ -19,6 +29,30 @@ console.log('=== [1] SYNTAX AUDIT ===');
     console.error('✘ ' + relPath + ' ERROR:', err.message);
     process.exit(1);
   }
+});
+
+const allStyles = [
+  'assets/css/style.css',
+  'assets/css/auth.css',
+  'assets/css/sell.css',
+  'assets/css/currency.css',
+  'assets/css/calculator.css',
+  'assets/css/compare.css',
+  'assets/css/saved.css'
+];
+
+allStyles.forEach(relPath => {
+  const file = path.join(rootDir, relPath);
+  if (!fs.existsSync(file)) {
+    console.error('✘ MISSING STYLESHEET:', relPath);
+    process.exit(1);
+  }
+  const stat = fs.statSync(file);
+  if (stat.size === 0) {
+    console.error('✘ EMPTY STYLESHEET:', relPath);
+    process.exit(1);
+  }
+  console.log('✔ ' + relPath + ': ' + stat.size + ' bytes');
 });
 
 console.log('\n=== [2] HTML & DOM ID AUDIT ===');
