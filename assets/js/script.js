@@ -20,128 +20,339 @@ const BRAND_NAME = 'MONTGOMERY';
    ========================================== */
 
 const properties = [
+  // ==========================================
+  // FOR SALE — APARTMENTS (5 listings)
+  // ==========================================
   {
     id: 1,
-    title: 'Sunset Ridge Modern Villa',
-    location: '1420 Sunset Ridge Dr, Beverly Hills, CA 90210',
-    price: 2450000,
-    type: 'house',
+    title: 'The Imperial Sea-Face Penthouse',
+    location: 'Worli Sea Face, South Mumbai, Maharashtra 400030, India',
+    price: 6850000,
+    type: 'apartment',
     purpose: 'sale',
     bedrooms: 5,
-    bathrooms: 4,
-    area: 3800,
-    image: './assets/images/property-luxury-1.jpg',
-    badge: 'Featured',
-    description: 'A stunning contemporary villa featuring floor-to-ceiling windows, an infinity pool, and panoramic views. This architectural masterpiece blends indoor and outdoor living seamlessly.',
-    amenities: ['Swimming Pool', 'Home Theater', 'Wine Cellar', 'Smart Home System', 'Heated Floors', '3-Car Garage', 'Outdoor Kitchen', 'Security System'],
+    bathrooms: 6,
+    area: 6400,
+    image: './assets/images/property-worli-seaface.jpg',
+    badge: 'Super Luxury',
+    description: 'Commanding panoramic vistas of the Arabian Sea and the Bandra-Worli Sea Link, this signature triplex sky penthouse features cantilevered glass balconies, a private temperature-controlled plunge pool, and bespoke Italian marble interiors.',
+    amenities: ['Arabian Sea Views', 'Private Plunge Pool', 'Private Elevator', 'Italian Marble', 'Concierge 24/7', '4-Car Valet Parking', 'Smart Home Automation'],
     featured: true
   },
   {
     id: 2,
-    title: 'Aurora Residences Penthouse',
-    location: '88 Park Avenue South, New York, NY 10016',
-    price: 1850000,
+    title: 'The Camellias Grand Sky Suite',
+    location: 'Golf Course Road, DLF Phase 5, Gurugram, Haryana 122002, India',
+    price: 5400000,
     type: 'apartment',
     purpose: 'sale',
-    bedrooms: 3,
-    bathrooms: 2,
-    area: 2200,
-    image: './assets/images/property-luxury-2.jpg',
-    badge: 'New',
-    description: 'Luxury penthouse in the heart of Manhattan with breathtaking skyline views. Features premium finishes, a gourmet kitchen, and a private terrace overlooking the city.',
-    amenities: ['Concierge', 'Rooftop Terrace', 'Fitness Center', 'Doorman', 'Private Elevator', 'Central Air', 'Built-in Storage', 'Pet Friendly'],
+    bedrooms: 4,
+    bathrooms: 5,
+    area: 7200,
+    image: './assets/images/property-gurugram-camellias.jpg',
+    badge: 'Golf View',
+    description: 'Overlooking the championship golf course, this ultra-exclusive residence at The Camellias offers expansive wraparound glass verandas, soaring double-height ceilings, a private wine cellar, and six-star resident club privileges.',
+    amenities: ['Championship Golf View', 'Helipad Access', 'Olympic Pool', 'Wine Cellar', 'Spa Sanctuary', 'Private Clubhouse', 'VRV Air Conditioning'],
     featured: true
   },
   {
     id: 3,
-    title: 'Oakwood Family Residence',
-    location: '2715 Oakwood Lane, Greenwich, CT 06830',
-    price: 985000,
-    type: 'house',
+    title: 'Pali Hill Celebrity Duplex',
+    location: 'Pali Hill, Bandra West, Mumbai, Maharashtra 400050, India',
+    price: 3950000,
+    type: 'apartment',
     purpose: 'sale',
     bedrooms: 4,
-    bathrooms: 3,
-    area: 2800,
-    image: './assets/images/property-1.jpg',
-    description: 'A beautifully renovated family home with a spacious backyard, modern kitchen, and cozy fireplace. Located in a quiet neighborhood with top-rated schools nearby.',
-    amenities: ['Fireplace', 'Garden', 'Attached Garage', 'Central Heating', 'Hardwood Floors', 'Updated Kitchen', 'Patio', 'Storage Room'],
+    bathrooms: 4,
+    area: 4600,
+    image: './assets/images/property-mumbai-palihill.jpg',
+    badge: 'Exclusive',
+    description: 'Nestled within Bandra’s celebrated Pali Hill enclave, this designer duplex penthouse features a private landscaped terrace pool, imported teak craftsmanship, and serene coastal breezes.',
+    amenities: ['Private Terrace Pool', 'Rooftop Lounge', 'Sea Breeze Cross-Ventilation', 'Chef Kitchen', 'Biometric Security', 'Electric Vehicle Charging'],
     featured: true
   },
   {
     id: 4,
-    title: 'Metropolitan Loft Studio',
-    location: '445 West 19th Street, Chicago, IL 60616',
-    price: 2800,
+    title: 'Sadashivnagar Modernist Residence',
+    location: 'Sadashivnagar, Bengaluru, Karnataka 560080, India',
+    price: 2750000,
     type: 'apartment',
-    purpose: 'rent',
-    bedrooms: 1,
-    bathrooms: 1,
-    area: 750,
-    image: './assets/images/property-2.jpg',
-    description: 'A stylish loft apartment in the vibrant West Loop neighborhood. Exposed brick, high ceilings, and industrial-chic design. Walking distance to restaurants and transit.',
-    amenities: ['In-unit Laundry', 'High Ceilings', 'Exposed Brick', 'Bike Storage', 'Package Room', 'Rooftop Access'],
+    purpose: 'sale',
+    bedrooms: 4,
+    bathrooms: 4,
+    area: 4200,
+    image: './assets/images/property-bengaluru-modern.jpg',
+    badge: 'Architectural',
+    description: 'An architectural sanctuary in the green heart of Sadashivnagar. Featuring warm European oak accents, minimalist open-plan living, and lush private balcony courtyards.',
+    amenities: ['Private Garden Deck', 'Smart Climate Control', 'European Oak Floors', 'Infinity Pool', '24/7 Security', 'Solar Power Backup'],
     featured: true
   },
   {
     id: 5,
-    title: 'Seaside Villa Retreat',
-    location: '1200 Ocean Front Walk, Santa Monica, CA 90401',
-    price: 3200000,
-    type: 'villa',
+    title: 'Aurora Residences Midtown Penthouse',
+    location: '88 Park Avenue South, New York, NY 10016, USA',
+    price: 4250000,
+    type: 'apartment',
     purpose: 'sale',
-    bedrooms: 6,
-    bathrooms: 5,
-    area: 4500,
-    image: './assets/images/property-3.jpg',
-    badge: 'Premium',
-    description: 'An extraordinary oceanfront villa offering direct beach access, a resort-style pool, and multiple entertainment areas. Perfect for those seeking the ultimate coastal lifestyle.',
-    amenities: ['Ocean View', 'Private Beach Access', 'Infinity Pool', 'Guest House', 'Home Office', 'Outdoor Shower', 'Fire Pit', 'Solar Panels'],
-    featured: true
+    bedrooms: 3,
+    bathrooms: 3,
+    area: 3100,
+    image: './assets/images/property-luxury-2.jpg',
+    badge: 'Manhattan',
+    description: 'Trophy penthouse in Midtown Manhattan featuring 360-degree skyline vistas, soaring ceilings, Calacatta marble counters, and direct elevator gallery entry.',
+    amenities: ['Manhattan Skyline Views', 'Doorman', 'Rooftop Terrace', 'Fitness Center', 'Private Elevator', 'Wine Storage'],
+    featured: false
   },
+
+  // ==========================================
+  // FOR SALE — HOUSES (5 listings)
+  // ==========================================
   {
     id: 6,
-    title: 'Riverside Townhouse',
-    location: '380 Riverside Drive, Portland, OR 97201',
-    price: 3500,
-    type: 'townhouse',
-    purpose: 'rent',
-    bedrooms: 3,
-    bathrooms: 2,
-    area: 1800,
-    image: './assets/images/property-4.jpg',
-    description: 'A charming townhouse along the Willamette River with a private deck, modern interiors, and walking trails right outside your door. Ideal for families and nature lovers.',
-    amenities: ['River Views', 'Private Deck', 'In-unit Laundry', 'Parking Included', 'Central Air', 'Dishwasher', 'Pets Allowed'],
+    title: 'Assagao Portuguese Heritage Villa',
+    location: 'Badem Road, Assagao, North Goa 403507, India',
+    price: 3200000,
+    type: 'house',
+    purpose: 'sale',
+    bedrooms: 5,
+    bathrooms: 6,
+    area: 5800,
+    image: './assets/images/property-goa-villa.jpg',
+    badge: 'Signature Villa',
+    description: 'Set amid swaying coconut groves in sought-after Assagao, this luxury villa marries Indo-Portuguese colonial architecture with chic tropical modernism and a private crystal-clear pool.',
+    amenities: ['Private Emerald Pool', 'Tropical Landscaped Gardens', 'Exposed Laterite Veranda', 'Terracotta Courtyard', 'Butler Quarters', 'Gourmet Outdoor Barbecue'],
     featured: true
   },
   {
     id: 7,
-    title: 'Heritage Square Apartment',
-    location: '1055 Heritage Square, Boston, MA 02109',
+    title: 'Lutyens’ Colonial-Modern Manor',
+    location: 'Amrita Shergill Marg, Lutyens’ Delhi, New Delhi 110003, India',
+    price: 11500000,
+    type: 'house',
+    purpose: 'sale',
+    bedrooms: 6,
+    bathrooms: 7,
+    area: 9600,
+    image: './assets/images/property-delhi-mansion.jpg',
+    badge: 'Trophy Estate',
+    description: 'One of India’s most prestigious residential addresses. This sprawling private manor features an immaculate 1-acre emerald lawn, grand Roman columns, and a heated garden swimming pool.',
+    amenities: ['1-Acre Manicured Lawn', 'Roman Colonnade', 'Private Heated Pool', 'Security Guard Outpost', 'Staff Annexe', 'Ballroom & Banquet Hall'],
+    featured: true
+  },
+  {
+    id: 8,
+    title: 'Jubilee Hills Hilltop Palatial Villa',
+    location: 'Road No. 36, Jubilee Hills, Hyderabad, Telangana 500033, India',
+    price: 4800000,
+    type: 'house',
+    purpose: 'sale',
+    bedrooms: 6,
+    bathrooms: 6,
+    area: 8400,
+    image: './assets/images/property-10.jpg',
+    badge: 'Hillside Palace',
+    description: 'Perched atop an exclusive crest in Jubilee Hills, this white Italian marble villa boasts a resort-scale swimming pool, triple-height glass atriums, and panoramic night views across the city.',
+    amenities: ['Hilltop Infinity Pool', 'Private Screening Room', 'Italian Onyx Bar', 'Landscaped Courtyard', 'Zen Water Feature', '8-Car Covered Garage'],
+    featured: true
+  },
+  {
+    id: 9,
+    title: 'Alibaug Waterfront Tropical Estate',
+    location: 'Awas Beach Road, Alibaug, Maharashtra 402201, India',
+    price: 3650000,
+    type: 'house',
+    purpose: 'sale',
+    bedrooms: 5,
+    bathrooms: 5,
+    area: 6700,
+    image: './assets/images/property-11.jpg',
+    badge: 'Waterfront',
+    description: 'A private speedboat retreat from Mumbai. This architectural estate features board-formed concrete pavilions, expansive lawn grounds, and direct private beach access.',
+    amenities: ['Direct Beach Access', 'Private Speedboat Jetty', 'Outdoor Dining Pavilion', 'Lap Pool', 'Organic Herb Garden', 'Caretaker Cottage'],
+    featured: false
+  },
+  {
+    id: 10,
+    title: 'Sunset Ridge Modern Villa',
+    location: '1420 Sunset Ridge Dr, Beverly Hills, CA 90210, USA',
+    price: 4950000,
+    type: 'house',
+    purpose: 'sale',
+    bedrooms: 5,
+    bathrooms: 5,
+    area: 5400,
+    image: './assets/images/property-luxury-1.jpg',
+    badge: 'Beverly Hills',
+    description: 'An architectural triumph in the Beverly Hills foothills. Features seamless indoor-outdoor pocket glass doors, cantilevered infinity pool, and dramatic Pacific ocean views.',
+    amenities: ['Infinity Pool', 'Home Theater', 'Wine Cellar', 'Smart Home System', 'Panoramic Canyon Views', '3-Car Garage'],
+    featured: false
+  },
+
+  // ==========================================
+  // FOR RENT — APARTMENTS (5 listings)
+  // ==========================================
+  {
+    id: 11,
+    title: 'Malabar Hill Oceanfront Sky Villa',
+    location: 'Walkeshwar Road, Malabar Hill, Mumbai, Maharashtra 400006, India',
+    price: 9500,
+    type: 'apartment',
+    purpose: 'rent',
+    bedrooms: 4,
+    bathrooms: 4,
+    area: 3800,
+    image: './assets/images/property-2.jpg',
+    badge: 'Sea View',
+    description: 'Prestige sea-facing residence perched high above Back Bay on Malabar Hill. Boasts a private infinity plunge pool, open sunset deck, and white-glove concierge services.',
+    amenities: ['Unobstructed Sea View', 'Private Plunge Pool', 'Full Staff Quarters', 'Direct Elevator', 'Clubhouse & Spa Access', '24/7 Power Backup'],
+    featured: true
+  },
+  {
+    id: 12,
+    title: 'Indiranagar Contemporary Sky Duplex',
+    location: '100 Feet Road, Indiranagar, Bengaluru, Karnataka 560038, India',
     price: 4200,
+    type: 'apartment',
+    purpose: 'rent',
+    bedrooms: 3,
+    bathrooms: 3,
+    area: 3100,
+    image: './assets/images/property-bengaluru-villa.jpg',
+    badge: 'Penthouse',
+    description: 'Geometric white cantilevered duplex penthouse in prime Indiranagar. Soaring double-height glass atriums, private rooftop entertaining deck, and automated ambient lighting.',
+    amenities: ['Terrace Deck', 'Automated Blinds', 'High-speed Fiber', 'Gym & Pool', 'Covered Parking', 'Pet Friendly'],
+    featured: false
+  },
+  {
+    id: 13,
+    title: 'Friends Colony West Garden Suite',
+    location: 'Friends Colony West, New Delhi, Delhi 110065, India',
+    price: 5600,
+    type: 'apartment',
+    purpose: 'rent',
+    bedrooms: 4,
+    bathrooms: 4,
+    area: 3900,
+    image: './assets/images/property-delhi-penthouse.jpg',
+    badge: 'Garden Residence',
+    description: 'Serene luxury floor in an exclusive South Delhi enclave. Features pristine Italian marble, private front and rear courtyard verandas, and diplomatic-grade security.',
+    amenities: ['Private Lawn Access', 'Italian Marble Flooring', 'Modular Gourmet Kitchen', '24/7 Gated Security', 'Servant Quarters', '2-Car Covered Garage'],
+    featured: true
+  },
+  {
+    id: 14,
+    title: 'One Avighna High-Rise Loft',
+    location: 'Lower Parel, Mumbai, Maharashtra 400013, India',
+    price: 4800,
+    type: 'apartment',
+    purpose: 'rent',
+    bedrooms: 3,
+    bathrooms: 3,
+    area: 2800,
+    image: './assets/images/property-mumbai-loft.jpg',
+    badge: 'Designer Loft',
+    description: 'Contemporary high-rise loft apartment in Mumbai’s bustling financial hub. Features minimalist Nordic interiors, floor-to-ceiling glass, and city skyline views.',
+    amenities: ['Skyline Views', 'Private Elevator', 'Heated Lap Pool', 'Squash Court', 'Concierge Desk', 'Automated Shading'],
+    featured: false
+  },
+  {
+    id: 15,
+    title: 'Metropolitan Mayfair Suite',
+    location: '42 Berkeley Square, Mayfair, London W1J 5AW, United Kingdom',
+    price: 7800,
     type: 'apartment',
     purpose: 'rent',
     bedrooms: 2,
     bathrooms: 2,
-    area: 1200,
-    image: './assets/images/property-5.jpg',
-    description: 'Elegant apartment in historic Back Bay with classic brownstone charm and modern updates. Close to the Charles River Esplanade and fine dining.',
-    amenities: ['Gym Access', 'Concierge', 'Hardwood Floors', 'Crown Molding', 'Bay Windows', 'Controlled Entry'],
+    area: 1750,
+    image: './assets/images/property-4.jpg',
+    badge: 'Mayfair Luxury',
+    description: 'Refined period apartment situated in the epicentre of Mayfair. Features ornate plaster moldings, bespoke oak cabinetry, gas fireplace, and 24-hour uniformed porter.',
+    amenities: ['24/7 Uniformed Porter', 'Period Fireplace', 'Private Garden Square Access', 'Bespoke Joinery', 'Climate Control'],
+    featured: false
+  },
+
+  // ==========================================
+  // FOR RENT — HOUSES (5 listings)
+  // ==========================================
+  {
+    id: 16,
+    title: 'Candolim Coastal Beachfront Villa',
+    location: 'Vaddi Beach Road, Candolim, North Goa 403515, India',
+    price: 6800,
+    type: 'house',
+    purpose: 'rent',
+    bedrooms: 4,
+    bathrooms: 4,
+    area: 4400,
+    image: './assets/images/feature-banner-1.jpg',
+    badge: 'Beachfront',
+    description: 'Step directly onto the golden sands of Candolim. This whitewashed modern beach sanctuary features a private swimming pool, sun deck, and dedicated culinary staff.',
+    amenities: ['Direct Beach Access', 'Private Swimming Pool', 'Sun Deck', 'Housekeeping & Chef Included', 'Outdoor Shower', 'Alfresco Barbecue'],
+    featured: true
+  },
+  {
+    id: 17,
+    title: 'Kasauli Pine Ridge Alpine Chalet',
+    location: 'Upper Mall Road, Kasauli, Himachal Pradesh 173204, India',
+    price: 3500,
+    type: 'house',
+    purpose: 'rent',
+    bedrooms: 3,
+    bathrooms: 3,
+    area: 3300,
+    image: './assets/images/property-1.jpg',
+    badge: 'Hill Station',
+    description: 'A warm pine-clad alpine chalet perched on Kasauli’s Upper Mall. Features stone hearths, double-glazed panoramic windows overlooking snow-capped peaks, and an organic apple orchard.',
+    amenities: ['Panoramic Himalayan Views', 'Stone Fireplace', 'Spruce Pine Woodwork', 'Glass Sunroom', 'Heated Bedrooms', 'Organic Orchard'],
     featured: false
   },
   {
-    id: 8,
-    title: 'Mountain View Estate',
-    location: '8900 Alpine Ridge Rd, Aspen, CO 81611',
-    price: 4750000,
+    id: 18,
+    title: 'Udaipur Royal Lakeside Haveli',
+    location: 'Haridas Ji Ki Magri, Lake Pichola, Udaipur, Rajasthan 313001, India',
+    price: 7200,
     type: 'house',
-    purpose: 'sale',
-    bedrooms: 7,
-    bathrooms: 6,
-    area: 6200,
-    image: './assets/images/property-6.jpg',
-    badge: 'Luxury',
-    description: 'A magnificent mountain estate with ski-in access, a heated outdoor pool, and world-class views of the Rockies. Features a spa, wine cellar, and home theater.',
-    amenities: ['Mountain Views', 'Ski-in Access', 'Heated Pool', 'Home Spa', 'Wine Cellar', 'Theater Room', 'Mudroom', 'Elevator'],
+    purpose: 'rent',
+    bedrooms: 4,
+    bathrooms: 5,
+    area: 5200,
+    image: './assets/images/property-udaipur-villa.jpg',
+    badge: 'Heritage Luxury',
+    description: 'Overlooking the serene waters of Lake Pichola, this regal Rajasthan pool villa showcases authentic hand-carved marble jharokhas, courtyards, and a private azure pool.',
+    amenities: ['Lake Pichola Views', 'Private Pool with Courtyard', 'Carved Marble Jharokhas', 'Rooftop Stargazing Terrace', 'Personal Chef on Request'],
+    featured: true
+  },
+  {
+    id: 19,
+    title: 'Koramangala Modernist Courtyard Villa',
+    location: '3rd Block, Koramangala, Bengaluru, Karnataka 560034, India',
+    price: 4600,
+    type: 'house',
+    purpose: 'rent',
+    bedrooms: 4,
+    bathrooms: 4,
+    area: 4800,
+    image: './assets/images/property-3.jpg',
+    badge: 'Courtyard Villa',
+    description: 'An urban sanctuary in Bengaluru’s vibrant Koramangala. Built around an internal tree court with floor-to-ceiling glass walls, timber decks, and private plunge pool.',
+    amenities: ['Central Green Courtyard', 'Private Plunge Pool', 'Solar Water Heating', 'Italian Kitchen', 'Servant Quarters', 'Home Automation'],
+    featured: false
+  },
+  {
+    id: 20,
+    title: 'Riverside Manor & Gardens',
+    location: '380 Riverside Drive, Portland, OR 97201, USA',
+    price: 4800,
+    type: 'house',
+    purpose: 'rent',
+    bedrooms: 4,
+    bathrooms: 3,
+    area: 3600,
+    image: './assets/images/property-12.webp',
+    badge: 'Riverside',
+    description: 'A charming country manor along the Willamette River with a private deck, modern dark-wood architecture, and walking trails right outside your door.',
+    amenities: ['River Views', 'Private Deck', 'In-unit Laundry', 'Covered Porch', 'Central Air', 'Pet Friendly'],
     featured: false
   }
 ];
@@ -401,6 +612,14 @@ function renderProperties(list) {
       toggleFavorite(btn);
     });
   });
+
+  // Ensure newly rendered cards become visible smoothly
+  requestAnimationFrame(() => {
+    grid.querySelectorAll('.property-card').forEach((card, index) => {
+      card.style.transitionDelay = `${Math.min(index * 0.04, 0.35)}s`;
+      card.classList.add('visible');
+    });
+  });
 }
 
 function createPropertyCard(p) {
@@ -519,7 +738,23 @@ function performSearch() {
 
   const filtered = all.filter(p => {
     if (location && !p.location.toLowerCase().includes(location) && !p.title.toLowerCase().includes(location)) return false;
-    if (type && p.type !== type) return false;
+    if (type) {
+      if (type === 'penthouse') {
+        const isPenthouse = (p.type && p.type.toLowerCase().includes('penthouse')) ||
+                            (p.badge && p.badge.toLowerCase().includes('penthouse')) ||
+                            (p.title && p.title.toLowerCase().includes('penthouse'));
+        if (!isPenthouse) return false;
+      } else if (type === 'house') {
+        if (p.type !== 'house' && p.type !== 'villa' && p.type !== 'townhouse') return false;
+      } else if (type === 'villa') {
+        const isVilla = (p.type && p.type.toLowerCase().includes('villa')) ||
+                        (p.badge && p.badge.toLowerCase().includes('villa')) ||
+                        (p.title && p.title.toLowerCase().includes('villa'));
+        if (!isVilla) return false;
+      } else if (p.type !== type) {
+        return false;
+      }
+    }
     if (purpose && p.purpose !== purpose) return false;
     if (p.price < minPrice) return false;
     if (p.price > maxPrice) return false;
@@ -581,6 +816,8 @@ function initPropertyFilters() {
       filtered = all;
     } else if (filter === 'sale' || filter === 'rent') {
       filtered = all.filter(p => p.purpose === filter);
+    } else if (filter === 'house') {
+      filtered = all.filter(p => p.type === 'house' || p.type === 'villa' || p.type === 'townhouse');
     } else {
       filtered = all.filter(p => p.type === filter);
     }
@@ -602,7 +839,7 @@ function initCategoryCards() {
 
       // Update active filter button
       document.querySelectorAll('.filter-btn').forEach(btn => {
-        if (btn.dataset.filter === cat) {
+        if (btn.dataset.filter === cat || (cat === 'villa' && btn.dataset.filter === 'house')) {
           btn.classList.add('active');
         } else {
           btn.classList.remove('active');
@@ -614,6 +851,8 @@ function initCategoryCards() {
       let filtered;
       if (cat === 'sale' || cat === 'rent') {
         filtered = all.filter(p => p.purpose === cat);
+      } else if (cat === 'house' || cat === 'villa') {
+        filtered = all.filter(p => p.type === 'house' || p.type === 'villa' || p.type === 'townhouse');
       } else {
         filtered = all.filter(p => p.type === cat);
       }
