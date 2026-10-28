@@ -80,12 +80,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function updateHeaderAuthUI() {
   const user = getCurrentUser();
-  const navbarActions = document.querySelector('.navbar-actions');
-  if (!navbarActions) return;
+  const authContainer = document.getElementById('navbarAuthState') || document.querySelector('.navbar-actions');
+  if (!authContainer) return;
 
   if (user) {
     const firstName = user.name ? user.name.split(' ')[0] : 'Member';
-    navbarActions.innerHTML = `
+    authContainer.innerHTML = `
       <span class="user-greeting" style="color: var(--color-gold); font-size: var(--fs-small); font-weight: var(--fw-medium); display: flex; align-items: center; gap: 4px;">
         <span class="material-symbols-rounded" style="font-size: 18px;" aria-hidden="true">account_circle</span>
         <span>${escapeHtml(firstName)}</span>

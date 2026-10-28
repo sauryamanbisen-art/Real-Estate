@@ -1,0 +1,562 @@
+/**
+ * MONTGOMERY Real Estate — Authentication Stylesheet
+ * Handles: Exact Animated Login & Sign Up Modal, Standalone Auth Pages,
+ * Curved Shapes, Diagonal Split Transitions, Underline Floating Labels, and Responsive Auth Card.
+ */
+
+/* ==========================================
+   PAGE LEVEL AUTH STYLES
+   ========================================== */
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header-auth {
+  position: relative;
+  background: var(--color-bg-secondary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* ==========================================
+   MODAL BACKDROP & WRAPPER
+   ========================================== */
+
+.auth-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 11, 15, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.auth-modal-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.auth-modal-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0.92);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.auth-modal-backdrop.is-open .auth-modal-wrapper {
+  transform: scale(1);
+}
+
+/* ==========================================
+   STANDALONE AUTH PAGE WRAPPER
+   ========================================== */
+
+.auth-page-animated {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px 40px;
+  background: radial-gradient(circle at 50% 30%, #1c1d25 0%, #0d0d11 100%);
+  position: relative;
+  overflow-x: hidden;
+}
+
+.auth-page-animated::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 650px;
+  height: 650px;
+  background: radial-gradient(circle, rgba(235, 83, 46, 0.14) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.auth-page-animated-header {
+  margin-bottom: 25px;
+  z-index: 2;
+  text-align: center;
+}
+
+/* ==========================================
+   CLOSE BUTTON
+   ========================================== */
+
+.auth-modal-close {
+  position: absolute;
+  top: -46px;
+  right: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 20;
+  transition: all 0.25s ease;
+}
+
+.auth-modal-close:hover {
+  background: #ff441f;
+  border-color: #ff441f;
+  transform: rotate(90deg);
+  box-shadow: 0 0 16px rgba(255, 68, 31, 0.6);
+}
+
+/* ==========================================
+   ANIMATED AUTH CARD CONTAINER
+   ========================================== */
+
+.animated-auth-box.container,
+.auth-modal-wrapper .container.animated-auth-box,
+.auth-page-animated .container.animated-auth-box {
+  position: relative;
+  width: 750px;
+  height: 460px;
+  background: #181920;
+  border: 2px solid #eb532e;
+  box-shadow: 0 0 28px rgba(235, 83, 46, 0.65), inset 0 0 16px rgba(235, 83, 46, 0.15);
+  border-radius: 14px;
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ==========================================
+   CURVED ANIMATED SHAPES (Red-orange diagonal split)
+   ========================================== */
+
+.animated-auth-box .curved-shape {
+  position: absolute;
+  right: 0;
+  top: -5px;
+  height: 600px;
+  width: 850px;
+  background: linear-gradient(45deg, #181920 15%, #c0391b 60%, #ff441f 100%);
+  transform: rotate(10deg) skewY(40deg);
+  transform-origin: bottom right;
+  transition: transform 1.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 1.3s;
+  z-index: 1;
+}
+
+.container.active .curved-shape,
+.animated-auth-box.active .curved-shape {
+  transform: rotate(0deg) skewY(0deg);
+  transition-delay: 0.3s;
+}
+
+.animated-auth-box .curved-shape2 {
+  position: absolute;
+  left: 250px;
+  top: 100%;
+  height: 700px;
+  width: 850px;
+  background: #181920;
+  border-top: 3px solid #ff441f;
+  transform: rotate(0deg) skewY(0deg);
+  transform-origin: bottom left;
+  transition: transform 1.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: 0.3s;
+  z-index: 1;
+}
+
+.container.active .curved-shape2,
+.animated-auth-box.active .curved-shape2 {
+  transform: rotate(-11deg) skewY(-41deg);
+  transition-delay: 1.0s;
+}
+
+/* ==========================================
+   FORM BOXES (Login & Register)
+   ========================================== */
+
+.animated-auth-box .form-box {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.animated-auth-box .form-box.Login {
+  left: 0;
+  padding: 0 45px;
+}
+
+.animated-auth-box .form-box.Register {
+  right: 0;
+  padding: 0 45px;
+  pointer-events: none;
+}
+
+.container.active .form-box.Login,
+.animated-auth-box.active .form-box.Login {
+  pointer-events: none;
+}
+
+.container.active .form-box.Register,
+.animated-auth-box.active .form-box.Register {
+  pointer-events: auto;
+}
+
+.animated-auth-box .form-box h2 {
+  font-size: 30px;
+  color: #ffffff;
+  text-align: center;
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-family: var(--font-primary, 'Inter', sans-serif);
+  letter-spacing: -0.02em;
+}
+
+/* ==========================================
+   INFO CONTENT BOXES
+   ========================================== */
+
+.animated-auth-box .info-content {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.animated-auth-box .info-content.Login {
+  right: 0;
+  width: 250px;
+  text-align: right;
+  padding: 0 40px 0 0;
+  align-items: flex-end;
+}
+
+.animated-auth-box .info-content.Register {
+  left: 0;
+  width: 250px;
+  text-align: left;
+  padding: 0 0 0 40px;
+  align-items: flex-start;
+  pointer-events: none;
+}
+
+.container.active .info-content.Login,
+.animated-auth-box.active .info-content.Login {
+  pointer-events: none;
+}
+
+.container.active .info-content.Register,
+.animated-auth-box.active .info-content.Register {
+  pointer-events: auto;
+}
+
+.animated-auth-box .info-content.Login h2,
+.animated-auth-box .info-content.Register h2 {
+  text-transform: uppercase;
+  font-size: 30px;
+  color: #ffffff;
+  line-height: 1.18;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  max-width: 195px;
+  font-family: var(--font-primary, 'Inter', sans-serif);
+}
+
+.animated-auth-box .info-content.Login p,
+.animated-auth-box .info-content.Register p {
+  font-size: 13.5px;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.5;
+  max-width: 195px;
+  margin: 0;
+  font-family: var(--font-primary, 'Inter', sans-serif);
+}
+
+/* ==========================================
+   INPUT BOX UNDERLINE DESIGN
+   ========================================== */
+
+.animated-auth-box .input-box {
+  position: relative;
+  width: 100%;
+  height: 52px;
+  margin: 18px 0 8px 0;
+}
+
+.animated-auth-box .input-box input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 2px solid #ffffff;
+  font-size: 15px;
+  color: #ffffff;
+  font-weight: 500;
+  padding: 16px 30px 4px 0;
+  box-sizing: border-box;
+  transition: border-bottom-color 0.3s ease;
+  border-radius: 0;
+}
+
+.animated-auth-box .input-box label {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.7);
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+
+.animated-auth-box .input-box input:focus ~ label,
+.animated-auth-box .input-box input:valid ~ label,
+.animated-auth-box .input-box input.has-value ~ label {
+  top: 4px;
+  font-size: 12.5px;
+  color: #ff4d29;
+  font-weight: 500;
+}
+
+.animated-auth-box .input-box input:not(:focus):valid ~ label,
+.animated-auth-box .input-box input:not(:focus).has-value ~ label {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.animated-auth-box .input-box input:focus {
+  border-bottom-color: #ff4d29;
+}
+
+.animated-auth-box .input-box .input-ico {
+  position: absolute;
+  bottom: 8px;
+  right: 0;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.65);
+  pointer-events: none;
+  transition: color 0.3s ease;
+}
+
+.animated-auth-box .input-box input:focus ~ .input-ico {
+  color: #ff4d29;
+}
+
+/* ==========================================
+   SUBMIT BUTTON & LINKS
+   ========================================== */
+
+.animated-auth-box .btn {
+  position: relative;
+  width: 100%;
+  height: 44px;
+  background: linear-gradient(90deg, #b23b1c, #d94b28);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  outline: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 15px;
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(217, 75, 40, 0.4);
+  margin-top: 18px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.25s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.animated-auth-box .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(217, 75, 40, 0.65);
+  background: linear-gradient(90deg, #c4401f, #eb532e);
+}
+
+.animated-auth-box .btn:active {
+  transform: translateY(0);
+}
+
+.animated-auth-box .regi-link {
+  font-size: 13.5px;
+  text-align: center;
+  margin-top: 18px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.animated-auth-box .regi-link p {
+  margin: 0;
+}
+
+.animated-auth-box .regi-link p a {
+  color: #eb532e;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.animated-auth-box .regi-link p a:hover {
+  text-decoration: underline;
+  color: #ff7152;
+}
+
+.animated-auth-box .animated-auth-feedback {
+  min-height: 18px;
+  font-size: 12px;
+  margin-top: 8px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.animated-auth-box .animated-auth-feedback.error {
+  color: #ff6b6b;
+}
+
+.animated-auth-box .animated-auth-feedback.success {
+  color: #4cd964;
+}
+
+/* ==========================================
+   ANIMATION KEYFRAMES & TRANSITIONS
+   ========================================== */
+
+.form-box.Login .animation {
+  transform: translateX(0%);
+  opacity: 1;
+  filter: blur(0px);
+  transition: .7s ease;
+  transition-delay: calc(.1s * var(--D));
+}
+
+.container.active .form-box.Login .animation,
+.animated-auth-box.active .form-box.Login .animation {
+  transform: translateX(-120%);
+  opacity: 0;
+  filter: blur(10px);
+  transition-delay: calc(.1s * var(--S));
+}
+
+.info-content.Login .animation {
+  transform: translateX(0%);
+  opacity: 1;
+  filter: blur(0px);
+  transition: .7s ease;
+  transition-delay: calc(.1s * var(--D));
+}
+
+.container.active .info-content.Login .animation,
+.animated-auth-box.active .info-content.Login .animation {
+  transform: translateX(120%);
+  opacity: 0;
+  filter: blur(10px);
+  transition-delay: calc(.1s * var(--S));
+}
+
+.form-box.Register .animation {
+  transform: translateX(120%);
+  transition: .7s ease;
+  opacity: 0;
+  filter: blur(10px);
+  transition-delay: calc(.1s * var(--S));
+}
+
+.container.active .animation,
+.animated-auth-box.active .animation {
+  transform: translateX(0%);
+  opacity: 1;
+  transition-delay: calc(.1s * var(--li));
+}
+
+.container.active .form-box.Register .animation,
+.animated-auth-box.active .form-box.Register .animation {
+  transform: translateX(0%);
+  opacity: 1;
+  filter: blur(0px);
+  transition-delay: calc(.1s * var(--li));
+}
+
+.info-content.Register .animation {
+  transform: translateX(-120%);
+  transition: .7s ease;
+  opacity: 0;
+  filter: blur(10px);
+  transition-delay: calc(.1s * var(--S));
+}
+
+.container.active .info-content.Register .animation,
+.animated-auth-box.active .info-content.Register .animation {
+  transform: translateX(0%);
+  opacity: 1;
+  filter: blur(0px);
+  transition-delay: calc(.1s * var(--li));
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN (MOBILE & TABLET)
+   ========================================== */
+
+@media (max-width: 768px) {
+  .animated-auth-box.container,
+  .auth-modal-wrapper .container.animated-auth-box,
+  .auth-page-animated .container.animated-auth-box {
+    width: 95vw;
+    max-width: 420px;
+    height: 520px;
+  }
+
+  .animated-auth-box .form-box {
+    width: 100%;
+    padding: 0 24px;
+  }
+
+  .animated-auth-box .info-content {
+    display: none;
+  }
+
+  .animated-auth-box .curved-shape,
+  .animated-auth-box .curved-shape2 {
+    display: none;
+  }
+
+  .form-box.Register .animation {
+    transform: translateY(100%);
+  }
+
+  .container.active .form-box.Register .animation,
+  .animated-auth-box.active .form-box.Register .animation {
+    transform: translateY(0%);
+  }
+
+  .container.active .form-box.Login .animation,
+  .animated-auth-box.active .form-box.Login .animation {
+    transform: translateY(-100%);
+  }
+}
