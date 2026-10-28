@@ -1,0 +1,283 @@
+/**
+ * MONTGOMERY Real Estate — Saved Properties Drawer Stylesheet
+ * Luxury right slide-out panel for bookmarked properties, live counter badges, and quick actions.
+ */
+
+/* ==========================================
+   HEADER SAVED BUTTON & COUNTER BADGE
+   ========================================== */
+
+.saved-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(201, 168, 76, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  border-radius: var(--radius-full);
+  padding: 6px 14px;
+  color: var(--color-text-primary);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.saved-nav-btn:hover {
+  background: rgba(201, 168, 76, 0.16);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.saved-nav-btn .material-symbols-rounded {
+  font-size: 18px;
+  color: var(--color-gold);
+}
+
+.saved-count-badge {
+  background: var(--color-gold);
+  color: var(--color-bg-primary);
+  font-size: 11px;
+  font-weight: var(--fw-bold);
+  padding: 1px 7px;
+  border-radius: var(--radius-full);
+  min-width: 18px;
+  text-align: center;
+}
+
+/* ==========================================
+   SLIDE-OUT DRAWER BACKDROP & PANEL
+   ========================================== */
+
+.saved-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 11, 15, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 9995;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.saved-drawer-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.saved-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  max-width: 440px;
+  height: 100%;
+  background: var(--color-bg-card);
+  border-left: 1px solid var(--color-border);
+  box-shadow: var(--shadow-2xl);
+  z-index: 9996;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.saved-drawer-backdrop.is-open .saved-drawer {
+  transform: translateX(0);
+}
+
+.saved-drawer-header {
+  padding: var(--space-xl);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.saved-drawer-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.saved-drawer-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  color: var(--color-text-primary);
+}
+
+.saved-drawer-close {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.saved-drawer-close:hover {
+  border-color: var(--color-gold);
+  color: var(--color-text-primary);
+  transform: rotate(90deg);
+}
+
+/* ==========================================
+   DRAWER LIST & ITEMS
+   ========================================== */
+
+.saved-drawer-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.saved-item-card {
+  display: flex;
+  gap: 14px;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 12px;
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+  position: relative;
+}
+
+.saved-item-card:hover {
+  border-color: rgba(201, 168, 76, 0.4);
+  transform: translateY(-2px);
+}
+
+.saved-item-img {
+  width: 90px;
+  height: 80px;
+  border-radius: var(--radius-md);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.saved-item-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.saved-item-title {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.saved-item-location {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 2px;
+}
+
+.saved-item-price {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-bold);
+  color: var(--color-gold);
+  margin-top: 4px;
+}
+
+.saved-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.saved-item-view-btn {
+  font-size: var(--fs-xs);
+  padding: 4px 10px;
+  background: var(--color-gold);
+  color: var(--color-bg-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  font-weight: var(--fw-semibold);
+  cursor: pointer;
+  transition: opacity var(--transition-fast);
+}
+
+.saved-item-view-btn:hover {
+  opacity: 0.9;
+}
+
+.saved-item-remove-btn {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.saved-item-remove-btn:hover {
+  color: var(--color-error);
+}
+
+/* ==========================================
+   EMPTY STATE
+   ========================================== */
+
+.saved-drawer-empty {
+  text-align: center;
+  padding: var(--space-4xl) var(--space-lg);
+  color: var(--color-text-secondary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-block: auto;
+}
+
+.saved-empty-icon {
+  font-size: 48px;
+  color: rgba(201, 168, 76, 0.4);
+  margin-bottom: var(--space-md);
+}
+
+.saved-empty-title {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: 6px;
+}
+
+.saved-empty-desc {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  max-width: 280px;
+  margin-bottom: var(--space-xl);
+}
+
+/* ==========================================
+   DRAWER FOOTER
+   ========================================== */
+
+.saved-drawer-footer {
+  padding: var(--space-lg) var(--space-xl);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--color-bg-elevated);
+}
