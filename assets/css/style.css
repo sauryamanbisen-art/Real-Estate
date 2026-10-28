@@ -336,7 +336,11 @@ body {
   align-items: center;
   justify-content: space-between;
   height: 100%;
-  gap: var(--space-md);
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 3vw, 2.5rem);
+  gap: clamp(1rem, 2vw, 2rem);
   position: relative;
 }
 
@@ -368,24 +372,18 @@ body {
 
 /* Navbar */
 .navbar {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  flex: 1;
-  gap: clamp(1rem, 1.8vw, 2.2rem);
-  white-space: nowrap;
+  display: contents;
 }
 
 .navbar-list {
   display: flex;
   align-items: center;
-  gap: clamp(1.6rem, 2.5vw, 2.8rem);
+  justify-content: center;
+  gap: clamp(1.25rem, 2vw, 2.2rem);
   list-style: none;
   margin: 0;
   padding: 0;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  flex-shrink: 0;
 }
 
 .nav-link {
@@ -426,6 +424,13 @@ body {
 
 .nav-link.active::after {
   width: 100%;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 1.2vw, 1.25rem);
+  flex-shrink: 0;
 }
 
 .navbar-actions {
@@ -1949,15 +1954,73 @@ input[type=number] { -moz-appearance: textfield; }
 @media (max-width: 1024px) {
 
   .header-container {
-    gap: var(--space-sm);
+    padding-inline: clamp(0.75rem, 2vw, 1.25rem);
+    gap: clamp(0.4rem, 1vw, 0.75rem);
   }
 
-  .navbar {
-    gap: 1.25rem;
+  .logo {
+    gap: 8px;
+  }
+
+  .logo-icon {
+    width: 22px;
+    height: 22px;
+  }
+
+  .logo-text {
+    font-size: 0.82rem;
+    letter-spacing: 0.14em;
   }
 
   .navbar-list {
-    gap: 1.25rem;
+    gap: clamp(0.5rem, 1vw, 1rem);
+  }
+
+  .nav-link {
+    font-size: 0.74rem;
+    letter-spacing: 0.08em;
+    padding: 4px 0;
+  }
+
+  .navbar-right {
+    gap: clamp(0.35rem, 0.8vw, 0.75rem);
+  }
+
+  .navbar-actions {
+    gap: clamp(0.35rem, 0.8vw, 0.6rem);
+  }
+
+  .header .saved-nav-btn {
+    padding: 4px 8px;
+    font-size: 0.72rem;
+    gap: 4px;
+  }
+
+  .header .saved-nav-btn .material-symbols-rounded {
+    font-size: 15px;
+  }
+
+  .header .currency-switcher {
+    padding: 2px;
+  }
+
+  .header .currency-btn {
+    padding: 2px 6px;
+    font-size: 0.68rem;
+  }
+
+  .nav-action-link {
+    font-size: 0.72rem;
+  }
+
+  .nav-contact-btn {
+    width: 26px;
+    height: 26px;
+  }
+
+  .nav-contact-icon {
+    width: 15px;
+    height: 15px;
   }
 
   .search-bar {
@@ -2021,6 +2084,7 @@ input[type=number] { -moz-appearance: textfield; }
   }
 
   .navbar {
+    display: flex;
     position: fixed;
     top: 0;
     right: 0;
@@ -2087,6 +2151,14 @@ input[type=number] { -moz-appearance: textfield; }
   .nav-link::after {
     left: 0;
     transform: none;
+  }
+
+  .navbar-right {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: var(--space-xl);
   }
 
   .navbar-actions {

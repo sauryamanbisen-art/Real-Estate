@@ -13,16 +13,46 @@ A modern, responsive real estate web application built with vanilla HTML5, CSS3,
 - **Authentic Architectural Imagery**: High-definition, authentic photography featuring real architectural estates with evening dusk illumination, sea-facing infinity plunge pools, and landscape verandas.
 - **Dynamic Category & Purpose Filters**:
   - Instant client-side filtering by **All Properties**, **For Sale**, **For Rent**, **Apartments**, and **Houses**.
+  - Dynamic results counter banner showing matching inventory count in real time.
   - Smooth staggered scroll-reveal animations ensuring all newly filtered cards animate seamlessly.
 - **Advanced Discovery & Search Engine**:
   - Filter by city/location keywords (e.g. *Mumbai*, *Goa*, *Delhi*, *Bengaluru*, *Hyderabad*), property types (*House*, *Apartment*, *Villa*, *Penthouse*), purpose (*Buy* or *Rent*), price range, and bedroom counts.
+- **Mortgage & EMI Financial Calculator**:
+  - Interactive luxury slide-out drawer with real-time sliders for property price, down payment, interest rate, and loan tenure (5 to 30 years).
+  - Dynamic visual breakdown bar calculating Principal & Interest, estimated property taxes, and home insurance.
+  - Quick-launch trigger directly from the navigation bar and from any property detail modal with auto-prefilled price.
+- **Property Comparison Engine**:
+  - Multi-property comparison matrix allowing users to compare up to 4 luxury estates side by side.
+  - Sticky floating comparison dock with quick thumbnail badges and 1-click modal table analyzing Price, Location, Type, Beds, Baths, SqFt, and Amenities.
+- **Shortlist & Saved Properties Drawer**:
+  - Instant client-side bookmarking with persistent `localStorage` storage.
+  - Slide-out drawer with direct detail view launch and one-click removal, with live badge counter in the top navigation bar.
+- **Live Dual-Currency Converter (USD / INR)**:
+  - Instant toggle between US Dollars (`$`) and Indian Rupees (`₹`) with authentic South Asian numbering formatting (Crores `Cr` and Lakhs `L`).
+  - Seamlessly re-renders all property cards, search summaries, and detail modals without full page reloads.
 - **Dual-Panel Animated Auth Modal**:
   - Coding Wizard animated glassmorphic modal with glowing diagonal curves and sliding transition between Login and Sign Up.
   - Form validation with localStorage persistence and automatic session synchronization across navbar headers.
 - **Interactive Property Detail Modals**:
-  - Full-screen property showcase with image galleries, price badges, bed/bath/sqft specifications, verified amenities, and client inquiry submission forms.
+  - Full-screen property showcase with image galleries, price badges, bed/bath/sqft specifications, verified amenities, direct EMI calculation launch, and client inquiry submission forms.
 - **Seller Listing Workflow**:
-  - Dedicated `/sell.html` interface with multi-image upload dropzones, instant client previews, and localStorage property publishing.
+  - Dedicated `/sell.html` interface with purpose selector (For Sale / For Rent), multi-image upload dropzones, instant client previews, and localStorage property publishing.
+
+---
+
+## 📁 Modular Architecture
+
+The codebase adheres strictly to separation of concerns with dedicated modular CSS and JS bundles:
+
+| Feature / Page | Stylesheet | Script | Purpose |
+| :--- | :--- | :--- | :--- |
+| **Global Theme & Core** | `assets/css/style.css` | `assets/js/script.js` | Core layout, navbar, property grid & search engine |
+| **Authentication Modal** | `assets/css/auth.css` | `assets/js/auth.js` | Glassmorphic dual-panel login & register modal |
+| **Seller Portal** | `assets/css/sell.css` | `assets/js/sell.js` | Dedicated `/sell.html` listing creation and image dropzone |
+| **Mortgage / EMI Calculator** | `assets/css/calculator.css` | `assets/js/calculator.js` | Financial loan calculator drawer & amortization bars |
+| **Comparison Matrix** | `assets/css/compare.css` | `assets/js/compare.js` | Side-by-side spec comparison dock and modal |
+| **Saved Shortlist** | `assets/css/saved.css` | `assets/js/saved.js` | Favorite properties drawer and navbar counter badge |
+| **Currency Switcher** | `assets/css/currency.css` | `assets/js/currency.js` | Real-time USD ($) / INR (₹ Cr/L) converter |
 
 ---
 
