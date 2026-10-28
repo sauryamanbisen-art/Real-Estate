@@ -1,0 +1,368 @@
+/**
+ * MONTGOMERY Real Estate — Sell & Rent Property Submission Stylesheet
+ * Handles: Sell hero section, multi-step fieldsets, drag & drop image uploader,
+ * thumbnail previews, purpose switchers, and responsive submission layout.
+ */
+
+/* ==========================================
+   SELL HERO
+   ========================================== */
+
+.sell-hero {
+  padding: calc(var(--header-height) + var(--space-3xl)) 0 var(--space-2xl);
+  background: linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-bg-primary) 100%);
+  border-bottom: 1px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.sell-hero::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.sell-hero-description {
+  color: var(--color-text-secondary);
+  max-width: 580px;
+  margin-inline: auto;
+  margin-top: var(--space-md);
+  font-size: var(--fs-base);
+  line-height: var(--lh-relaxed);
+}
+
+/* ==========================================
+   FORM SECTION & CONTAINER
+   ========================================== */
+
+.sell-form-section {
+  padding: var(--space-3xl) 0 var(--space-4xl);
+}
+
+.sell-form {
+  max-width: 840px;
+  margin-inline: auto;
+}
+
+/* ==========================================
+   FIELDSETS & LEGENDS
+   ========================================== */
+
+.form-fieldset {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2xl);
+  margin-bottom: var(--space-2xl);
+  background: var(--color-bg-card);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition-normal);
+}
+
+.form-fieldset:hover {
+  border-color: rgba(201, 168, 76, 0.35);
+}
+
+.fieldset-legend {
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-semibold);
+  color: var(--color-gold);
+  padding: 0 var(--space-sm);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ==========================================
+   FORM ROWS & GROUPS
+   ========================================== */
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+}
+
+.form-row-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.form-group {
+  margin-bottom: var(--space-lg);
+}
+
+.form-label {
+  display: block;
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-sm);
+}
+
+.form-input {
+  width: 100%;
+  padding: 13px 16px;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  font-size: var(--fs-small);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-input:focus {
+  border-color: var(--color-gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.15);
+  outline: none;
+}
+
+.form-input.error {
+  border-color: var(--color-error);
+}
+
+.form-select {
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23999999'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 22px;
+  padding-right: 42px;
+}
+
+.form-select option {
+  background: var(--color-bg-card);
+  color: var(--color-text-primary);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+  line-height: var(--lh-relaxed);
+}
+
+.form-error {
+  display: block;
+  font-size: var(--fs-xs);
+  color: var(--color-error);
+  margin-top: 4px;
+  min-height: 16px;
+}
+
+/* ==========================================
+   LISTING PURPOSE SELECTOR PILLS
+   ========================================== */
+
+.purpose-toggle-group {
+  display: flex;
+  gap: 12px;
+  margin-bottom: var(--space-lg);
+}
+
+.purpose-toggle-option {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  color: var(--color-text-secondary);
+  font-weight: var(--fw-medium);
+  font-size: var(--fs-small);
+  transition: all var(--transition-fast);
+}
+
+.purpose-toggle-option:hover {
+  border-color: var(--color-gold);
+  color: var(--color-text-primary);
+}
+
+.purpose-toggle-option.active {
+  background: rgba(201, 168, 76, 0.12);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+}
+
+.purpose-toggle-option input[type="radio"] {
+  display: none;
+}
+
+/* ==========================================
+   DRAG & DROP FILE UPLOAD AREA
+   ========================================== */
+
+.file-upload {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-2xl);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.015);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.file-upload:hover,
+.file-upload.dragover {
+  border-color: var(--color-gold);
+  background: rgba(201, 168, 76, 0.04);
+}
+
+.file-upload-icon {
+  font-size: 44px;
+  color: var(--color-gold);
+  margin-bottom: var(--space-sm);
+  transition: transform var(--transition-fast);
+}
+
+.file-upload:hover .file-upload-icon {
+  transform: translateY(-3px);
+}
+
+.file-upload-text {
+  font-size: var(--fs-small);
+  color: var(--color-text-secondary);
+}
+
+.file-upload-link {
+  color: var(--color-gold);
+  font-weight: var(--fw-medium);
+  text-decoration: underline;
+}
+
+.file-upload-hint {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-xs);
+}
+
+.file-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+}
+
+/* ==========================================
+   IMAGE PREVIEW GRID
+   ========================================== */
+
+.file-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-top: var(--space-md);
+}
+
+.file-preview-item {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+  animation: fadeIn 0.3s ease;
+}
+
+.file-preview-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.file-preview-remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  background: rgba(10, 11, 15, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.file-preview-remove:hover {
+  background: var(--color-error);
+  border-color: var(--color-error);
+}
+
+/* ==========================================
+   FORM STATUS & SUBMIT ACTIONS
+   ========================================== */
+
+.form-status {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-lg);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  border-radius: var(--radius-md);
+  padding: var(--space-md) var(--space-lg);
+}
+
+.form-status.success {
+  background: rgba(76, 175, 80, 0.12);
+  border: 1px solid var(--color-success);
+  color: var(--color-success);
+}
+
+.form-status.error {
+  background: rgba(239, 83, 80, 0.12);
+  border: 1px solid var(--color-error);
+  color: var(--color-error);
+}
+
+.sell-form-actions {
+  text-align: center;
+}
+
+.btn-full {
+  width: 100%;
+  padding-block: 16px;
+  font-size: var(--fs-base);
+}
+
+/* ==========================================
+   RESPONSIVE DESIGN
+   ========================================== */
+
+@media (max-width: 768px) {
+  .form-row,
+  .form-row-3 {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .form-fieldset {
+    padding: var(--space-lg);
+  }
+
+  .purpose-toggle-group {
+    flex-direction: column;
+  }
+}
