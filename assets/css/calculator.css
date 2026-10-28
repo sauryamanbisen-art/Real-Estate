@@ -1,0 +1,342 @@
+/**
+ * MONTGOMERY Real Estate — Mortgage & Investment Calculator Stylesheet
+ * Elegant luxury modal & inline calculator with real-time slider controls and visual breakdown bars.
+ */
+
+/* ==========================================
+   CALCULATOR MODAL & WRAPPER
+   ========================================== */
+
+.calc-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 11, 15, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.calc-modal-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.calc-card {
+  position: relative;
+  width: 100%;
+  max-width: 680px;
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-gold);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-2xl), 0 0 35px rgba(201, 168, 76, 0.2);
+  padding: var(--space-2xl);
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: translateY(20px) scale(0.96);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.calc-modal-backdrop.is-open .calc-card {
+  transform: translateY(0) scale(1);
+}
+
+.calc-close-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.calc-close-btn:hover {
+  color: var(--color-text-primary);
+  border-color: var(--color-gold);
+  transform: rotate(90deg);
+}
+
+/* ==========================================
+   HEADER & SUMMARY CARD
+   ========================================== */
+
+.calc-header {
+  margin-bottom: var(--space-xl);
+}
+
+.calc-subtitle {
+  font-size: var(--fs-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--color-gold);
+  font-weight: var(--fw-semibold);
+  margin-bottom: 4px;
+}
+
+.calc-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-h2);
+  color: var(--color-text-primary);
+}
+
+.calc-result-box {
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.12) 0%, rgba(18, 19, 26, 0.95) 100%);
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  text-align: center;
+  margin-bottom: var(--space-2xl);
+}
+
+.calc-monthly-label {
+  font-size: var(--fs-small);
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.calc-monthly-amount {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: var(--fw-bold);
+  color: var(--color-gold);
+  font-family: var(--font-display);
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.calc-monthly-period {
+  font-size: var(--fs-base);
+  color: var(--color-text-secondary);
+  font-weight: var(--fw-normal);
+}
+
+/* ==========================================
+   BREAKDOWN VISUAL BAR
+   ========================================== */
+
+.calc-bar-wrapper {
+  margin: var(--space-lg) 0 var(--space-md);
+}
+
+.calc-bar {
+  display: flex;
+  height: 10px;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  background: var(--color-bg-elevated);
+}
+
+.calc-bar-segment {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.calc-bar-pi { background: var(--color-gold); }
+.calc-bar-tax { background: #3b82f6; }
+.calc-bar-ins { background: #10b981; }
+
+.calc-legend {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  font-size: var(--fs-xs);
+  color: var(--color-text-secondary);
+  margin-top: 10px;
+}
+
+.calc-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.calc-legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.calc-legend-dot.pi { background: var(--color-gold); }
+.calc-legend-dot.tax { background: #3b82f6; }
+.calc-legend-dot.ins { background: #10b981; }
+
+/* ==========================================
+   INPUT SLIDERS & CONTROLS
+   ========================================== */
+
+.calc-controls-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+}
+
+.calc-control-group {
+  margin-bottom: var(--space-lg);
+}
+
+.calc-control-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.calc-control-label {
+  font-size: var(--fs-small);
+  color: var(--color-text-secondary);
+  font-weight: var(--fw-medium);
+}
+
+.calc-control-val {
+  font-size: var(--fs-small);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-primary);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+}
+
+.calc-slider {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-bg-elevated);
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  accent-color: var(--color-gold);
+}
+
+.calc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  border: 2px solid var(--color-bg-primary);
+  box-shadow: 0 0 6px rgba(201, 168, 76, 0.5);
+  cursor: pointer;
+  transition: transform 0.15s ease;
+}
+
+.calc-slider::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Term buttons */
+.calc-term-options {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.calc-term-btn {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-secondary);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.calc-term-btn:hover {
+  border-color: var(--color-gold);
+  color: var(--color-text-primary);
+}
+
+.calc-term-btn.active {
+  background: rgba(201, 168, 76, 0.15);
+  border-color: var(--color-gold);
+  color: var(--color-gold);
+  font-weight: var(--fw-semibold);
+}
+
+/* ==========================================
+   METRIC SUMMARY ROW
+   ========================================== */
+
+.calc-metrics-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-xl);
+  padding-top: var(--space-lg);
+  border-top: 1px solid var(--color-border);
+}
+
+.calc-metric-item {
+  text-align: center;
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+}
+
+.calc-metric-title {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+
+.calc-metric-number {
+  font-size: var(--fs-base);
+  font-weight: var(--fw-semibold);
+  color: var(--color-text-primary);
+}
+
+/* Inline modal trigger inside property detail */
+.modal-calc-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: var(--space-md);
+  padding: 10px 16px;
+  background: rgba(201, 168, 76, 0.08);
+  border: 1px solid rgba(201, 168, 76, 0.35);
+  border-radius: var(--radius-md);
+  color: var(--color-gold);
+  font-size: var(--fs-small);
+  font-weight: var(--fw-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.modal-calc-trigger:hover {
+  background: rgba(201, 168, 76, 0.16);
+  border-color: var(--color-gold);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+  .calc-controls-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  .calc-metrics-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+}
