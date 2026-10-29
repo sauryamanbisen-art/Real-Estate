@@ -84,7 +84,7 @@
   transform: translateX(-50%);
   width: 650px;
   height: 650px;
-  background: radial-gradient(circle, rgba(235, 83, 46, 0.14) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(205, 164, 94, 0.16) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -118,10 +118,11 @@
 }
 
 .auth-modal-close:hover {
-  background: #ff441f;
-  border-color: #ff441f;
+  background: var(--color-gold, #cda45e);
+  border-color: var(--color-gold, #cda45e);
+  color: var(--color-bg-primary, #0a0a0a);
   transform: rotate(90deg);
-  box-shadow: 0 0 16px rgba(255, 68, 31, 0.6);
+  box-shadow: 0 0 16px rgba(205, 164, 94, 0.6);
 }
 
 /* ==========================================
@@ -135,8 +136,8 @@
   width: 750px;
   height: 460px;
   background: #181920;
-  border: 2px solid #eb532e;
-  box-shadow: 0 0 28px rgba(235, 83, 46, 0.65), inset 0 0 16px rgba(235, 83, 46, 0.15);
+  border: 2px solid var(--color-gold, #cda45e);
+  box-shadow: 0 0 32px rgba(205, 164, 94, 0.55), inset 0 0 16px rgba(205, 164, 94, 0.12);
   border-radius: 14px;
   padding: 0;
   margin: 0;
@@ -145,7 +146,7 @@
 }
 
 /* ==========================================
-   CURVED ANIMATED SHAPES (Red-orange diagonal split)
+   CURVED ANIMATED SHAPES (Gold diagonal split)
    ========================================== */
 
 .animated-auth-box .curved-shape {
@@ -154,7 +155,7 @@
   top: -5px;
   height: 600px;
   width: 850px;
-  background: linear-gradient(45deg, #181920 15%, #c0391b 60%, #ff441f 100%);
+  background: linear-gradient(45deg, #181920 15%, #7a5c24 50%, var(--color-gold, #cda45e) 82%, var(--color-gold-light, #dfba78) 100%);
   transform: rotate(10deg) skewY(40deg);
   transform-origin: bottom right;
   transition: transform 1.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -175,7 +176,7 @@
   height: 700px;
   width: 850px;
   background: #181920;
-  border-top: 3px solid #ff441f;
+  border-top: 3px solid var(--color-gold, #cda45e);
   transform: rotate(0deg) skewY(0deg);
   transform-origin: bottom left;
   transition: transform 1.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -344,7 +345,7 @@
 .animated-auth-box .input-box input.has-value ~ label {
   top: 4px;
   font-size: 12.5px;
-  color: #ff4d29;
+  color: var(--color-gold, #cda45e);
   font-weight: 500;
 }
 
@@ -354,7 +355,7 @@
 }
 
 .animated-auth-box .input-box input:focus {
-  border-bottom-color: #ff4d29;
+  border-bottom-color: var(--color-gold, #cda45e);
 }
 
 .animated-auth-box .input-box .input-ico {
@@ -368,7 +369,7 @@
 }
 
 .animated-auth-box .input-box input:focus ~ .input-ico {
-  color: #ff4d29;
+  color: var(--color-gold, #cda45e);
 }
 
 /* ==========================================
@@ -379,15 +380,16 @@
   position: relative;
   width: 100%;
   height: 44px;
-  background: linear-gradient(90deg, #b23b1c, #d94b28);
+  background: linear-gradient(90deg, var(--color-gold-dark, #b88f48), var(--color-gold, #cda45e));
   border: 1px solid rgba(255, 255, 255, 0.15);
   outline: none;
   border-radius: 40px;
   cursor: pointer;
   font-size: 15px;
-  color: #ffffff;
-  font-weight: 600;
-  box-shadow: 0 4px 15px rgba(217, 75, 40, 0.4);
+  color: var(--color-text-inverse, #0d0d0d);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 18px rgba(205, 164, 94, 0.4);
   margin-top: 18px;
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.25s ease;
   display: flex;
@@ -397,8 +399,8 @@
 
 .animated-auth-box .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(217, 75, 40, 0.65);
-  background: linear-gradient(90deg, #c4401f, #eb532e);
+  box-shadow: 0 6px 24px rgba(205, 164, 94, 0.6);
+  background: linear-gradient(90deg, var(--color-gold, #cda45e), var(--color-gold-light, #dfba78));
 }
 
 .animated-auth-box .btn:active {
@@ -417,7 +419,7 @@
 }
 
 .animated-auth-box .regi-link p a {
-  color: #eb532e;
+  color: var(--color-gold, #cda45e);
   text-decoration: none;
   font-weight: 600;
   transition: color 0.2s ease;
@@ -425,7 +427,7 @@
 
 .animated-auth-box .regi-link p a:hover {
   text-decoration: underline;
-  color: #ff7152;
+  color: var(--color-gold-light, #dfba78);
 }
 
 .animated-auth-box .animated-auth-feedback {
