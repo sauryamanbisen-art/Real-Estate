@@ -260,7 +260,7 @@ body {
   font-size: var(--fs-small);
   font-weight: var(--fw-semibold);
   letter-spacing: var(--ls-wide);
-  transition: all var(--transition-normal);
+  transition: color var(--transition-fast), background var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
   white-space: nowrap;
   cursor: pointer;
   text-transform: uppercase;
@@ -321,13 +321,14 @@ body {
   width: 100%;
   height: var(--header-height);
   z-index: 1002;
-  transition: background var(--transition-normal), box-shadow var(--transition-normal);
+  transition: background var(--transition-fast), box-shadow var(--transition-fast);
+  will-change: background, box-shadow;
 }
 
 .header.scrolled {
   background: rgba(13, 13, 13, 0.95);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 1px 0 var(--color-border);
 }
 
@@ -567,7 +568,7 @@ body {
   height: 3px;
   background-color: var(--color-gold);
   margin-bottom: 24px;
-  animation: fadeInUp 0.8s ease forwards;
+  animation: fadeInUp 0.45s ease forwards;
 }
 
 .hero-title {
@@ -578,7 +579,7 @@ body {
   letter-spacing: -0.015em;
   color: #ffffff;
   margin-bottom: 24px;
-  animation: fadeInUp 0.8s ease forwards;
+  animation: fadeInUp 0.45s ease forwards;
 }
 
 .hero-title .gold-text em,
@@ -597,7 +598,7 @@ body {
   line-height: 1.6;
   max-width: 440px;
   margin-bottom: 34px;
-  animation: fadeInUp 0.8s 0.2s ease both;
+  animation: fadeInUp 0.45s 0.1s ease both;
 }
 
 .hero-actions {
@@ -605,7 +606,7 @@ body {
   align-items: center;
   gap: var(--space-md);
   flex-wrap: wrap;
-  animation: fadeInUp 0.8s 0.35s ease both;
+  animation: fadeInUp 0.45s 0.18s ease both;
 }
 
 #explorePropertiesBtn {
@@ -623,7 +624,7 @@ body {
   text-transform: uppercase;
   border: none;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
-  transition: all var(--transition-normal);
+  transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
   text-decoration: none;
 }
 
@@ -875,7 +876,7 @@ input[type=number] { -moz-appearance: textfield; }
   font-weight: var(--fw-medium);
   color: var(--color-text-secondary);
   border: 1px solid var(--color-border);
-  transition: all var(--transition-fast);
+  transition: color 0.18s ease, background-color 0.18s ease, border-color 0.18s ease;
   white-space: nowrap;
 }
 
@@ -902,8 +903,10 @@ input[type=number] { -moz-appearance: textfield; }
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  transition: all var(--transition-normal);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
   cursor: pointer;
+  will-change: transform;
+  contain: layout style;
 }
 
 .property-card:hover {
@@ -922,7 +925,8 @@ input[type=number] { -moz-appearance: textfield; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--transition-slow);
+  transition: transform 0.35s ease;
+  will-change: transform;
 }
 
 .property-card:hover .property-card-image img {
@@ -958,18 +962,18 @@ input[type=number] { -moz-appearance: textfield; }
   width: 36px;
   height: 36px;
   border-radius: var(--radius-full);
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(8px);
+  background: rgba(10, 10, 10, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  transition: all var(--transition-fast);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  will-change: transform;
 }
 
 .property-favorite:hover {
   background: var(--color-error);
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
 
 .property-favorite.saved {
@@ -1091,7 +1095,8 @@ input[type=number] { -moz-appearance: textfield; }
   background: var(--color-bg-card);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
-  transition: all var(--transition-normal);
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+  will-change: transform;
 }
 
 .category-card:hover {
@@ -1152,11 +1157,12 @@ input[type=number] { -moz-appearance: textfield; }
   text-align: center;
   padding: var(--space-2xl) var(--space-lg);
   border-radius: var(--radius-lg);
-  transition: all var(--transition-normal);
+  transition: background-color 0.22s ease, transform 0.22s ease;
 }
 
 .feature-card:hover {
   background: var(--color-bg-card);
+  transform: translateY(-2px);
 }
 
 .feature-icon {
@@ -1211,7 +1217,8 @@ input[type=number] { -moz-appearance: textfield; }
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
   text-align: center;
-  transition: all var(--transition-normal);
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+  will-change: transform;
 }
 
 .agent-card:hover {
@@ -1936,13 +1943,21 @@ input[type=number] { -moz-appearance: textfield; }
 
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(14px);
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
 }
 
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+.features-section,
+.stories-section,
+.agents-section {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 600px;
 }
 
 

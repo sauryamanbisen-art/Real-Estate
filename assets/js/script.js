@@ -410,6 +410,14 @@ const agents = [
 ];
 
 /* ==========================================
+   APP STATE
+   ========================================== */
+
+let currentRenderedList = [];
+let propertyGridInitialized = false;
+let cachedSectionOffsets = null;
+
+/* ==========================================
    DOM READY
    ========================================== */
 
@@ -465,8 +473,24 @@ function updateHeaderAuth() {
 }
 
 /* ==========================================
-   NAVIGATION
+   NAVIGATION & SCROLL MANAGEMENT
    ========================================== */
+
+function getSectionOffsets() {
+  if (!cachedSectionOffsets) {
+    const propsSec = document.getElementById('properties');
+    const agentsSec = document.getElementById('agents');
+    cachedSectionOffsets = {
+      properties: propsSec ? propsSec.offsetTop : 0,
+      agents: agentsSec ? agentsSec.offsetTop : 0
+    };
+  }
+  return cachedSectionOffsets;
+}
+
+window.addEventListener('resize', () => {
+  cachedSectionOffsets = null;
+}, { passive: true });
 
 function initNavigation() {
   const toggler = document.querySelector('[data-nav-toggler]');
@@ -517,31 +541,6 @@ function initNavigation() {
     });
   });
 
-  // Dynamic active link indicator on scroll
-  window.addEventListener('scroll', () => {
-    const scrollPos = window.scrollY + 160;
-    const propsSec = document.getElementById('properties');
-    const agentsSec = document.getElementById('agents');
-
-    let currentSection = 'hero';
-    if (agentsSec && scrollPos >= agentsSec.offsetTop) {
-      currentSection = 'agents';
-    } else if (propsSec && scrollPos >= propsSec.offsetTop) {
-      currentSection = 'properties';
-    } else {
-      currentSection = 'hero';
-    }
-
-    navbar.querySelectorAll('.nav-link').forEach(link => {
-      const href = link.getAttribute('href');
-      if (href === `#${currentSection}`) {
-        link.classList.add('active');
-      } else if (href && href.startsWith('#')) {
-        link.classList.remove('active');
-      }
-    });
-  }, { passive: true });
-
   // Close on outside click
   document.addEventListener('click', (e) => {
     if (navbar.classList.contains('active') &&
@@ -561,26 +560,100 @@ function initNavigation() {
 }
 
 /* ==========================================
-   HEADER SCROLL
+   OPTIMIZED HEADER & SCROLL TRACKING
+   Uses requestAnimationFrame throttling, cached offsets,
+   and dirty-checking to eliminate layout thrashing.
    ========================================== */
 
 function initHeader() {
   const header = document.querySelector('[data-header]');
-  if (!header) return;
+  const navbar = document.querySelector('[data-navbar]');
+  const navHashLinks = navbar ? navbar.querySelectorAll('.nav-link[href^="#"]') : [];
+
+  let lastScrollY = window.scrollY;
+  let isTicking = false;
+  let isHeaderScrolled = false;
+  let currentActiveSection = 'hero';
+
+  const updateScroll = () => {
+    const scrollY = lastScrollY;
+
+    // 1. Header background toggle (dirty-checked to eliminate unnecessary DOM paints)
+    const shouldScrolled = scrollY > 50;
+    if (header && shouldScrolled !== isHeaderScrolled) {
+      isHeaderScrolled = shouldScrolled;
+      header.classList.toggle('scrolled', shouldScrolled);
+    }
+
+    // 2. Active nav link (cached offsets + dirty-checked)
+    if (navHashLinks.length > 0) {
+      const offsets = getSectionOffsets();
+      const scrollPos = scrollY + 160;
+      let newSection = 'hero';
+
+      if (offsets.agents && scrollPos >= offsets.agents) {
+        newSection = 'agents';
+      } else if (offsets.properties && scrollPos >= offsets.properties) {
+        newSection = 'properties';
+      }
+
+      if (newSection !== currentActiveSection) {
+        currentActiveSection = newSection;
+        navHashLinks.forEach(link => {
+          const href = link.getAttribute('href');
+          link.classList.toggle('active', href === `#${newSection}`);
+        });
+      }
+    }
+
+    isTicking = false;
+  };
 
   const onScroll = () => {
-    header.classList.toggle('scrolled', window.scrollY > 50);
+    lastScrollY = window.scrollY;
+    if (!isTicking) {
+      window.requestAnimationFrame(updateScroll);
+      isTicking = true;
+    }
   };
 
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  updateScroll();
 }
 
 /* ==========================================
    RENDER PROPERTIES
    ========================================== */
 
-let currentRenderedList = [];
+function initPropertyGridEvents() {
+  if (propertyGridInitialized) return;
+  const grid = document.getElementById('propertyGrid');
+  if (!grid) return;
+  propertyGridInitialized = true;
+
+  // Single event delegation listener for the entire grid
+  grid.addEventListener('click', (e) => {
+    const favBtn = e.target.closest('.property-favorite');
+    if (favBtn) {
+      e.stopPropagation();
+      toggleFavorite(favBtn);
+      return;
+    }
+
+    const cmpBtn = e.target.closest('.property-compare-btn');
+    if (cmpBtn) {
+      return;
+    }
+
+    const card = e.target.closest('.property-card');
+    if (card && card.dataset.id) {
+      const id = parseInt(card.dataset.id, 10);
+      if (!isNaN(id)) {
+        openPropertyModal(id);
+      }
+    }
+  });
+}
 
 function renderProperties(list) {
   currentRenderedList = list;
@@ -592,9 +665,12 @@ function renderProperties(list) {
   }
   if (!grid) return;
 
+  initPropertyGridEvents();
+
   if (list.length === 0) {
     grid.style.display = 'none';
     if (empty) empty.style.display = 'block';
+    cachedSectionOffsets = null;
     return;
   }
 
@@ -603,34 +679,11 @@ function renderProperties(list) {
 
   grid.innerHTML = list.map(p => createPropertyCard(p)).join('');
 
-  // Attach card click handlers
-  grid.querySelectorAll('.property-card').forEach(card => {
-    card.addEventListener('click', (e) => {
-      if (e.target.closest('.property-favorite') || e.target.closest('.property-compare-btn')) return;
-      const id = parseInt(card.dataset.id);
-      openPropertyModal(id);
-    });
-  });
-
-  // Attach favorite handlers
-  grid.querySelectorAll('.property-favorite').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleFavorite(btn);
-    });
-  });
-
   if (typeof updateCompareButtons === 'function') {
     updateCompareButtons();
   }
 
-  // Ensure newly rendered cards become visible smoothly
-  requestAnimationFrame(() => {
-    grid.querySelectorAll('.property-card').forEach((card, index) => {
-      card.style.transitionDelay = `${Math.min(index * 0.04, 0.35)}s`;
-      card.classList.add('visible');
-    });
-  });
+  cachedSectionOffsets = null;
 }
 
 window.refreshPropertyView = function () {
@@ -649,15 +702,15 @@ function createPropertyCard(p) {
   const saved = getSavedProperties().includes(p.id);
 
   return `
-    <article class="property-card reveal" data-id="${p.id}" data-type="${p.type}" data-purpose="${p.purpose}">
+    <article class="property-card visible" data-id="${p.id}" data-type="${p.type}" data-purpose="${p.purpose}">
       <div class="property-card-image">
-        <img src="${p.image}" alt="${escapeHtml(p.title)}" width="400" height="275" loading="lazy"
+        <img src="${p.image}" alt="${escapeHtml(p.title)}" width="400" height="275" loading="lazy" decoding="async"
              onerror="this.src='./assets/images/property-1.jpg'">
         <button type="button" class="property-compare-btn" data-property-id="${p.id}" onclick="event.stopPropagation(); toggleCompare(${p.id});" aria-label="Compare property" title="Compare side-by-side">
           <span class="material-symbols-rounded" aria-hidden="true">compare_arrows</span>
         </button>
         <span class="property-badge ${badgeClass}">${badgeText}</span>
-        <button class="property-favorite ${saved ? 'saved' : ''}" aria-label="${saved ? 'Remove from saved' : 'Save property'}" data-property-id="${p.id}">
+        <button type="button" class="property-favorite ${saved ? 'saved' : ''}" aria-label="${saved ? 'Remove from saved' : 'Save property'}" data-property-id="${p.id}">
           <span class="material-symbols-rounded" aria-hidden="true">${saved ? 'favorite' : 'favorite_border'}</span>
         </button>
       </div>
@@ -696,8 +749,8 @@ function renderAgents() {
   if (!grid) return;
 
   grid.innerHTML = agents.map(a => `
-    <div class="agent-card reveal">
-      <img src="${a.avatar}" alt="${a.name}" class="agent-avatar" width="80" height="80" loading="lazy"
+    <div class="agent-card visible">
+      <img src="${a.avatar}" alt="${a.name}" class="agent-avatar" width="80" height="80" loading="lazy" decoding="async"
            onerror="this.style.background='var(--color-bg-elevated)'">
       <h3 class="agent-name">${escapeHtml(a.name)}</h3>
       <p class="agent-role">${escapeHtml(a.role)}</p>
@@ -716,6 +769,8 @@ function renderAgents() {
       contactAgent(name, role);
     });
   });
+
+  cachedSectionOffsets = null;
 }
 
 function contactAgent(name, role) {
@@ -1182,23 +1237,16 @@ function initScrollReveal() {
       }
     });
   }, {
-    threshold: 0.08,
-    rootMargin: '0px 0px -30px 0px'
+    threshold: 0.01,
+    rootMargin: '120px 0px 60px 0px'
   });
 
-  // Observe elements with .reveal
-  const revealElements = document.querySelectorAll('.reveal, .section-header, .category-card, .feature-card, .agent-card');
+  // Observe elements with .reveal that are not already visible
+  const revealElements = document.querySelectorAll('.reveal:not(.visible), .section-header:not(.visible), .category-card:not(.visible), .feature-card:not(.visible)');
   revealElements.forEach(el => {
     el.classList.add('reveal');
     observer.observe(el);
   });
-
-  // Re-observe after property render
-  setTimeout(() => {
-    document.querySelectorAll('.property-card.reveal:not(.visible)').forEach(el => {
-      observer.observe(el);
-    });
-  }, 100);
 }
 
 /* ==========================================
